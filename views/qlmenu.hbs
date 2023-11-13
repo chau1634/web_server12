@@ -197,21 +197,25 @@
                     
                   <form action="/auth/themmenu" method="POST" style="margin-top: 20px;">
                     <div class="form-group input-rounded">
-                    <select class="form-control" id="chucvu" name="mamn" style="margin-bottom: 5px; padding: 10px;">
+                    {{!-- <select class="form-control" id="chucvu" name="mamn" style="margin-bottom: 5px; padding: 10px;">
                        <option value="Đồ uống">1. Đồ uống</option>
                        <option value="Khác">2. Khác</option>
-                     </select>
+                     </select> --}}
                    </div>
+                <div class="form-group input-rounded">
+                    <input type="text" class="form-control" placeholder="Mã đồ uống" id="MaMn" name="mamn"
+                        style=" margin-bottom: 5px; padding: 10px;" />
+                </div>
                     <div class="form-group input-rounded">
-                      <input type="text" class="form-control" placeholder="Tên đồ uống" id="MaNcc" name="tenmn" style=" margin-bottom: 5px; padding: 10px;"/>
+                      <input type="text" class="form-control" placeholder="Tên đồ uống" id="TenDu" name="tenmn" style=" margin-bottom: 5px; padding: 10px;"/>
                     </div>
                     <div class="form-group input-rounded">
-                      <input type="text" class="form-control" placeholder="Giá tiền" id="MaLh" name="gia" style=" margin-bottom: 5px;  padding: 10px;"/>
+                      <input type="text" class="form-control" placeholder="Giá tiền" id="Giatien" name="giatien" style=" margin-bottom: 5px;  padding: 10px;"/>
                     </div>
                 
                     <div style="display: flex; justify-content: space-between;">
     <button type="submit" class="btn btn-primary" style="flex: 1; margin-right: 10px;"> Thêm </button>
-    <a href="/hienmenu" class="btn btn-primary" style="flex: 1;">Menu</a>
+    <a href="/hienmenu" class="btn btn-primary" style="flex: 1;">Menu</a>   
 </div>
 
 

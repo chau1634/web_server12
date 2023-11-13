@@ -218,6 +218,7 @@
                 <th>Mã Menu</th>
                 <th>Tên đồ uống</th>
                 <th>Giá tiền</th>
+                <th>Thao tác</th>
                 
             </tr>
         </thead>
@@ -225,8 +226,13 @@
             {{#each menu}}
             <tr>
                 <td>{{this.MaMn}}</td>
-                <td>{{this.TenLh}}</td>
+                <td>{{this.TenDu}}</td>
                 <td>{{this.Giatien}}</td>
+                <td>
+                    <a href="/edit/{{this.MaMn}}" style="background-color: rgb(242, 47, 47); color: #f5f5f5;">Edit</a>
+                    <a href="/xoamenu/{{this.MaMn}}" id="delete" class="delete-button"
+                        style="background-color: rgb(64, 64, 232); color: #f5f5f5;">Delete</a>
+                </td>
         
                 
             {{/each}}
@@ -250,7 +256,27 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-   
+   <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Đặt một biến để kiểm tra xem tương tác đã xảy ra hay chưa
+        
+
+        // Ẩn thông báo ban đầu
+        const message = document.getElementById('message');
+        message.style.display = 'none';
+
+        // Tương tác với thông báo (ví dụ: khi người dùng click vào nút)
+        const button = document.getElementById('delete');
+        button.addEventListener('click', function (event) {
+            tt = true;
+
+            // Hiển thị thông báo
+            message.style.display = 'block';
+
+        });
+        return false;
+    });
+</script>
 
 
 
