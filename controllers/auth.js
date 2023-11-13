@@ -306,7 +306,7 @@ exports.themmenu = (req, res) => {
       dB.query(
         "INSERT INTO menu SET ?",
         {
-          MaMn: mamn[0],
+          MaMn: mamn,
           TenDu: tenmn,
           Giatien: giatien,
         },
