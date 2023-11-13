@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -30,43 +29,16 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
-    <style>
-        .product-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.product-table th, .product-table td {
-  border: 1px solid #ccc;
-  padding: 8px;
-  text-align: left;
-}
-
-.product-table th {
-  background-color: #f5f5f5;
-  font-weight: bold;
-}
-
-.product-table tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-.product-table tr:hover {
-  background-color: #ddd;
-}
 
 
-
-    </style>
-    
-    
 
 </head>
 
 <body>
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div id="spinner"
+            class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
@@ -82,8 +54,11 @@
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
-                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                        <img class="rounded-circle" src="http://localhost:8000/img/user.jpg" alt=""
+                            style="width: 40px; height: 40px;">
+                        <div
+                            class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
+                        </div>
                     </div>
                     <div class="ms-3">
                         <h6 class="mb-0">Jhon Doe</h6>
@@ -93,23 +68,28 @@
                 <div class="navbar-nav w-100">
                     <a href="/auth/login" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Quản Lý</a>
                     {{!-- <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Elements</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
+                                class="fa fa-laptop me-2"></i>Elements</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="button.html" class="dropdown-item">Buttons</a>
                             <a href="typography.html" class="dropdown-item">Typography</a>
                             <a href="element.html" class="dropdown-item">Other Elements</a>
                         </div>
                     </div> --}}
-                    <a href="/kho" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Kho Hàng</a>
-                     <a href="/themnhanvien" class="nav-item nav-link  "><i class="fa fa-keyboard me-2"></i>Quản lý nhân viên</a>
-                    <a href="/themmenu" class="nav-item nav-link active "><i class="fa fa-table me-2"></i>Quản lý Menu</a>
-                    <a href="qldoanhthu.hbs" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Quản lý doanh thu</a>
+                    <a href="/kho" class="nav-item nav-link "><i class="fa fa-th me-2"></i>Kho Hàng</a>
+                    <a href="/themnhanvien" class="nav-item nav-link "><i class="fa fa-keyboard me-2"></i>Quản lý nhân
+                        viên</a>
+                    <a href="/themmenu" class="nav-item nav-link active"><i class="fa fa-table me-2"></i>Quản lý
+                        Menu</a>
+                    <a href="qldoanhthu.hbs" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Quản lý doanh
+                        thu</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
+                        <a href="#" class="nav-item nav-link" data-bs-toggle="dropdown"><i
+                                class="far fa-file-alt me-2"></i>Pages</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="signin.html" class="dropdown-item">Sign In</a>
                             <a href="signup.html" class="dropdown-item">Sign Up</a>
-                            <a href="404.html" class="dropdown-item active">404 Error</a>
+
                             <a href="blank.html" class="dropdown-item">Blank Page</a>
                         </div>
                     </div>
@@ -141,7 +121,8 @@
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">
                                 <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                    <img class="rounded-circle" src="http://localhost:8000/img/user.jpg" alt=""
+                                        style="width: 40px; height: 40px;">
                                     <div class="ms-2">
                                         <h6 class="fw-normal mb-0">Jhon send you a message</h6>
                                         <small>15 minutes ago</small>
@@ -151,7 +132,8 @@
                             <hr class="dropdown-divider">
                             <a href="#" class="dropdown-item">
                                 <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                    <img class="rounded-circle" src="img/user.jpg" alt=""
+                                        style="width: 40px; height: 40px;">
                                     <div class="ms-2">
                                         <h6 class="fw-normal mb-0">Jhon send you a message</h6>
                                         <small>15 minutes ago</small>
@@ -161,7 +143,8 @@
                             <hr class="dropdown-divider">
                             <a href="#" class="dropdown-item">
                                 <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                    <img class="rounded-circle" src="img/user.jpg" alt=""
+                                        style="width: 40px; height: 40px;">
                                     <div class="ms-2">
                                         <h6 class="fw-normal mb-0">Jhon send you a message</h6>
                                         <small>15 minutes ago</small>
@@ -198,7 +181,8 @@
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                            <img class="rounded-circle me-lg-2" src="http://localhost:8000/img/user.jpg" alt=""
+                                style="width: 40px; height: 40px;">
                             <span class="d-none d-lg-inline-flex">John Doe</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
@@ -209,82 +193,87 @@
                     </div>
                 </div>
             </nav>
-           
-<div class="row" style=" width: 93%;">
-    <h1>Danh sách Menu</h1> 
-    </script>
-    <table class="product-table">
-        <thead>
-            <tr>
-                <th>Mã Menu</th>
-                <th>Tên đồ uống</th>
-                <th>Giá tiền</th>
-                <th>Thao tác</th>
-                
-            </tr>
-        </thead>
-        <tbody>
-            {{#each menu}}
-            <tr>
-                <td>{{this.MaMn}}</td>
-                <td>{{this.TenDu}}</td>
-                <td>{{this.Giatien}}</td>
-                <td>
-                    <a href="/edit/{{this.MaMn}}" style="background-color: rgb(242, 47, 47); color: #f5f5f5;">Edit</a>
-                    <a href="/xoamenu/{{this.MaMn}}" id="delete" class="delete-button"
-                        style="background-color: rgb(64, 64, 232); color: #f5f5f5;">Delete</a>
-                </td>
-        
-                
-            {{/each}}
-        </tbody>
-    </table>
-</div>
+            <!-- Navbar End -->
 
-        
 
-      
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/chart/chart.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+            <!-- 404 Start -->
+            <div class="row">
+                <h1 style="text-align: center; margin-top: 50px; ">Chỉnh sửa Menu</h1>
+                <div class="col-lg-5 col-md-7 col-sm-9 col-11 mx-auto">
 
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Đặt một biến để kiểm tra xem tương tác đã xảy ra hay chưa
-        
 
-        // Ẩn thông báo ban đầu
-        const message = document.getElementById('message');
-        message.style.display = 'none';
+                    <div class="grid">
+                        <div class="grid-body">
+                            <div class="row">
+                                <div class="col-lg-15 col-md-15 col-sm-15 col-15 mx-auto form-wrapper">
+                                    <div class="form-container">
 
-        // Tương tác với thông báo (ví dụ: khi người dùng click vào nút)
-        const button = document.getElementById('delete');
-        button.addEventListener('click', function (event) {
-            tt = true;
+                                        <form action="/auth/themmenu" method="POST" style="margin-top: 20px;">
+                                            <div class="form-group input-rounded">
+                                                {{!-- <select class="form-control" id="chucvu" name="mamn"
+                                                    style="margin-bottom: 5px; padding: 10px;">
+                                                    <option value="Đồ uống">1. Đồ uống</option>
+                                                    <option value="Khác">2. Khác</option>
+                                                </select> --}}
+                                            </div>
+                                            <div class="form-group input-rounded">
+                                                <input type="text" class="form-control" placeholder="Mã đồ uống"
+                                                    id="MaMn" name="mamn" style=" margin-bottom: 5px; padding: 10px;" />
+                                            </div>
+                                            <div class="form-group input-rounded">
+                                                <input type="text" class="form-control" placeholder="Tên đồ uống"
+                                                    id="TenDu" name="tenmn"
+                                                    style=" margin-bottom: 5px; padding: 10px;" />
+                                            </div>
+                                            <div class="form-group input-rounded">
+                                                <input type="text" class="form-control" placeholder="Giá tiền"
+                                                    id="Giatien" name="giatien"
+                                                    style=" margin-bottom: 5px;  padding: 10px;" />
+                                            </div>
 
-            // Hiển thị thông báo
-            message.style.display = 'block';
-
-        });
-        return false;
-    });
-</script>
+                                            <div style="display: flex; justify-content: space-between;">
+                                                <button type="submit" class="btn btn-primary"
+                                                    style="flex: 1; margin-right: 10px;"> Thêm </button>
+                                                <a href="/hienmenu" class="btn btn-primary" style="flex: 1;">Menu</a>
+                                            </div>
 
 
 
 
-   
-    
-    
+                                        </form>
+
+
+
+                                        {{#if message}}
+                                        <h4 class="alert alert-danger mt-4">{{message}}</h4>
+                                        {{/if}}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <!-- JavaScript Libraries -->
+                <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="lib/chart/chart.min.js"></script>
+                <script src="lib/easing/easing.min.js"></script>
+                <script src="lib/waypoints/waypoints.min.js"></script>
+                <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+                <script src="lib/tempusdominus/js/moment.min.js"></script>
+                <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+                <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+                <!-- Template Javascript -->
+                <script src="js/main.js"></script>
+
+
+
 </body>
 
 </html>

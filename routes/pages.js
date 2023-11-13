@@ -41,11 +41,15 @@ router.get("/themnhanvien", (req, res) => {
 router.get("/themmenu", (req, res) => {
   res.render("qlmenu");
 });
+router.get("/suamenu", (req, res) => {
+  res.render("qlmenu");
+});
 
 router.get("/hienkho", authController.hienkho);
 router.get("/xoahanghoa/:MaHH", authController.xoahanghoa);
 router.get("/xoamenu/:MaMn", authController.xoamenu);
 router.get("/hiennhanvien", authController.hiennhanvien);
 router.get("/hienmenu", authController.hienmenu);
+router.get("/suamenu", authController.suamenu);
 
 module.exports = router;

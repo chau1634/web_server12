@@ -324,3 +324,45 @@ exports.themmenu = (req, res) => {
     }
   );
 };
+app.get("/suamenu/:MaMn", (req, res) => {
+  const maMn = req.params.MaMn;
+
+  // Fetch the menu item details based on MaMn from the database
+  dB.query("SELECT * FROM menu WHERE MaMn = ?", [maMn], (err, results) => {
+    if (err) {
+      console.error("Error fetching menu item details:", err);
+      return res.status(500).send("Internal Server Error");
+    }
+
+    if (results.length === 0) {
+      // Handle case where menu item with given MaMn is not found
+
+      return res.status(404).send("Menu item not found");
+    }
+
+    // Render the edit form with the menu item details
+    res.render("suamenu", { menu: results[0] });
+  });
+});
+
+// Add this route to handle the update form submission
+app.post("/suamenu/:MaMn", (req, res) => {
+  const maMn = req.params.MaMn;
+
+  const { tenmn, giatien } = req.body;
+
+  // Update the menu item details in the database
+  dB.query(
+    "UPDATE menu SET TenDu = ?, Giatien = ? WHERE MaMn = ?",
+    [tenmn, giatien, maMn],
+    (err, results) => {
+      if (err) {
+        console.error("Error updating menu item details:", err);
+        return res.status(500).send("Internal Server Error");
+      }
+
+      // Redirect to the menu page or display a success message
+      res.redirect("/hienmenu");
+    }
+  );
+});
