@@ -230,6 +230,31 @@ exports.hienmenu = (req, res) => {
       res.render('hienmenu', { menu: results});
     });
   };
+  exports.doanhthu = (req, res) => {
+
+    dB.query('SELECT * FROM doanhthu', (err, results, fields) => {
+      if (err) {
+        console.error('Lỗi truy vấn:', err);
+        return;
+      }
+    
+      res.render('doanhthu', { doanhthu: results});
+    });
+  };
+exports.doanhthutrangchu = (req, res) => {
+
+    dB.query('SELECT * FROM doanhthu', (err, results, fields) => {
+      if (err) {
+        console.error('Lỗi truy vấn:', err);
+        return;
+      }
+      // Xử lý kết quả dữ liệu ở đây
+      console.log('Dữ liệu từ cơ sở dữ liệu doanhthu:', results);
+      
+      // Hiển thị trang HTML với dữ liệu từ cơ sở dữ liệu
+      res.render('trangchu', { doanhthu: results});
+    });
+  };
   exports.themmenu = (req,res) => {
     console.log(req.body);
 

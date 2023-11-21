@@ -37,20 +37,30 @@ router.get('/login', (req,res) =>{
 router.get('/kho', (req,res) =>{
     res.render('kho')
 })
-router.get('/auth/login', (req,res) =>{
-  res.render('trangchu')
-})
+// router.get('/auth/login', (req,res) =>{
+//   res.render('trangchu')
+// })
 router.get('/themnhanvien', (req,res) =>{
   res.render('qlnhanvien')
 })
 router.get('/themmenu', (req,res) =>{
   res.render('qlmenu')
 })
+router.get('/doanhthu1', (req,res) =>{
+  res.render('qldoanhthu')
+})
+
+
 
 router.get('/hienkho', authController.hienkho);
 router.get('/xoahanghoa/:MaHH', authController.xoahanghoa);
 router.get('/hiennhanvien', authController.hiennhanvien);
 router.get('/hienmenu', authController.hienmenu);
+router.get('/doanhthu', authController.doanhthu);
+router.get('/trangchu', authController.doanhthutrangchu);
+
+
+
 
 
 module.exports = router;
