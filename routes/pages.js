@@ -46,11 +46,23 @@ router.get('/themnhanvien', (req,res) =>{
 router.get('/themmenu', (req,res) =>{
   res.render('qlmenu')
 })
+router.get('/nhacungcap', (req,res) =>{
+  res.render('nhacungcap')
+})
+router.get('/loaihang', (req,res) =>{
+  res.render('loaihang')
+})
+
 
 router.get('/hienkho', authController.hienkho);
 router.get('/xoahanghoa/:MaHH', authController.xoahanghoa);
+router.get('/suahanghoa', authController.suahanghoa);
 router.get('/hiennhanvien', authController.hiennhanvien);
 router.get('/hienmenu', authController.hienmenu);
+router.get('/hiennhacungcap', authController.hiennhacungcap);
+router.get('/hienloaihang', authController.hienloaihang);
+router.get('/xoaloaihang/:TenLh', authController.xoaloaihang);
+router.get('/xoanhacungcap/:MaNcc', authController.xoanhacungcap);
 
 
 module.exports = router;

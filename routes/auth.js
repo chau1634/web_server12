@@ -7,7 +7,8 @@ router.post('/login', authController.login)
 router.post('/kho', authController.kho)
 router.post('/themnhanvien', authController.themnhanvien)
 router.post('/themmenu', authController.themmenu)
-// router.get('/hienkho', authController.hienkho);
+router.post('/nhacungcap', authController.nhacungcap)
+router.post('/loaihang', authController.loaihang)
 
 
 
