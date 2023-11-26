@@ -37,16 +37,15 @@ router.get('/login', (req,res) =>{
 router.get('/kho', (req,res) =>{
     res.render('kho')
 })
-// router.get('/auth/login', (req,res) =>{
-//   res.render('trangchu')
-// })
+router.get('/auth/login', (req,res) =>{
+  res.render('trangchu')
+})
 router.get('/themnhanvien', (req,res) =>{
   res.render('qlnhanvien')
 })
 router.get('/themmenu', (req,res) =>{
   res.render('qlmenu')
 })
-<<<<<<< HEAD
 router.get('/nhacungcap', (req,res) =>{
   res.render('nhacungcap')
 })
@@ -54,31 +53,30 @@ router.get('/loaihang', (req,res) =>{
   res.render('loaihang')
 })
 
-=======
 router.get('/doanhthu1', (req,res) =>{
   res.render('qldoanhthu')
 })
 
 
->>>>>>> 534e82f31851119a8165f6632140dfb6ff334804
+
 
 router.get('/hienkho', authController.hienkho);
 router.get('/xoahanghoa/:MaHH', authController.xoahanghoa);
 router.get('/suahanghoa', authController.suahanghoa);
 router.get('/hiennhanvien', authController.hiennhanvien);
 router.get('/hienmenu', authController.hienmenu);
-<<<<<<< HEAD
+
 router.get('/hiennhacungcap', authController.hiennhacungcap);
 router.get('/hienloaihang', authController.hienloaihang);
 router.get('/xoaloaihang/:TenLh', authController.xoaloaihang);
 router.get('/xoanhacungcap/:MaNcc', authController.xoanhacungcap);
-=======
+
 router.get('/doanhthu', authController.doanhthu);
 router.get('/trangchu', authController.doanhthutrangchu);
 
 
 
->>>>>>> 534e82f31851119a8165f6632140dfb6ff334804
+
 
 
 module.exports = router;
