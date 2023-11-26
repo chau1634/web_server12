@@ -37,9 +37,9 @@ router.get('/login', (req,res) =>{
 router.get('/kho', (req,res) =>{
     res.render('kho')
 })
-router.get('/auth/login', (req,res) =>{
-  res.render('trangchu')
-})
+// router.get('/auth/login', (req,res) =>{
+//   res.render('trangchu')
+// })
 router.get('/themnhanvien', (req,res) =>{
   res.render('qlnhanvien')
 })
