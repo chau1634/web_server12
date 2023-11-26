@@ -72,7 +72,7 @@ router.get('/xoaloaihang/:TenLh', authController.xoaloaihang);
 router.get('/xoanhacungcap/:MaNcc', authController.xoanhacungcap);
 
 router.get('/doanhthu', authController.doanhthu);
-router.get('/trangchu', authController.doanhthutrangchu);
+router.get('/auth/login', authController.doanhthutrangchu);
 
 
 
