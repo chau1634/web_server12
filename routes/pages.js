@@ -57,7 +57,7 @@ router.get('/xoahanghoa/:MaHH', authController.xoahanghoa);
 router.get('/hiennhanvien', authController.hiennhanvien);
 router.get('/hienmenu', authController.hienmenu);
 router.get('/doanhthu', authController.doanhthu);
-router.get('/trangchu', authController.doanhthutrangchu);
+router.get('/auth/login', authController.doanhthutrangchu);
 
 
 

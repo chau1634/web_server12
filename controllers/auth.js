@@ -232,29 +232,39 @@ exports.hienmenu = (req, res) => {
   };
   exports.doanhthu = (req, res) => {
 
-    dB.query('SELECT * FROM doanhthu', (err, results, fields) => {
+    dB.query('SELECT * FROM oder', (err, results, fields) => {
       if (err) {
         console.error('Lỗi truy vấn:', err);
         return;
       }
     
-      res.render('doanhthu', { doanhthu: results});
+      res.render('doanhthu', { oder: results});
     });
   };
 exports.doanhthutrangchu = (req, res) => {
+    dB.query('SELECT * FROM oder', (errDoanhThu, resultsDoanhThu, fieldsDoanhThu) => {
+        if (errDoanhThu) {
+            console.error('Lỗi truy vấn doanhthu:', errDoanhThu);
+            return res.status(500).json(errDoanhThu.toString());
+        }
 
-    dB.query('SELECT * FROM doanhthu', (err, results, fields) => {
-      if (err) {
-        console.error('Lỗi truy vấn:', err);
-        return;
-      }
-      // Xử lý kết quả dữ liệu ở đây
-      console.log('Dữ liệu từ cơ sở dữ liệu doanhthu:', results);
-      
-      // Hiển thị trang HTML với dữ liệu từ cơ sở dữ liệu
-      res.render('trangchu', { doanhthu: results});
+        // Xử lý kết quả dữ liệu doanhthu ở đây
+        console.log('Dữ liệu từ cơ sở dữ liệu doanhthu:', resultsDoanhThu);
+
+        dB.query('SELECT * FROM nhanvien', (errNhanVien, resultsNhanVien, fieldsNhanVien) => {
+            if (errNhanVien) {
+                console.error('Lỗi truy vấn nhanvien:', errNhanVien);
+                return res.status(500).json(errNhanVien.toString());
+            }
+
+            // Xử lý kết quả dữ liệu nhanvien ở đây
+            console.log('Dữ liệu từ cơ sở dữ liệu nhanvien:', resultsNhanVien);
+
+            // Hiển thị trang HTML với dữ liệu từ cơ sở dữ liệu
+            res.render('trangchu', { doanhthu: resultsDoanhThu, nhanvien: resultsNhanVien });
+        });
     });
-  };
+};
   exports.themmenu = (req,res) => {
     console.log(req.body);
 
