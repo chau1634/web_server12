@@ -37,9 +37,7 @@ router.get('/login', (req,res) =>{
 router.get('/kho', (req,res) =>{
     res.render('kho')
 })
-router.get('/auth/login', (req,res) =>{
-  res.render('trangchu')
-})
+
 router.get('/themnhanvien', (req,res) =>{
   res.render('qlnhanvien')
 })
@@ -72,7 +70,7 @@ router.get('/xoaloaihang/:TenLh', authController.xoaloaihang);
 router.get('/xoanhacungcap/:MaNcc', authController.xoanhacungcap);
 
 router.get('/doanhthu', authController.doanhthu);
-router.get('/trangchu', authController.doanhthutrangchu);
+router.get('/auth/login', authController.doanhthutrangchu);
 
 
 
