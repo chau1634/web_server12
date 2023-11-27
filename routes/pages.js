@@ -24,11 +24,11 @@ const verifyToken =  (req, res, next) => {
 
 
 // Routers  
-router.get('/', (req,res) =>{ 
+// router.get('/', (req,res) =>{ 
     
-    verifyToken(req,res);
-    res.render('trangchu')
-})
+//     verifyToken(req,res);
+//     res.render('trangchu')
+// })
 
 router.get('/login', (req,res) =>{ 
     res.render('dangnhap')
@@ -37,9 +37,7 @@ router.get('/login', (req,res) =>{
 router.get('/kho', (req,res) =>{
     res.render('kho')
 })
-// router.get('/auth/login', (req,res) =>{
-//   res.render('trangchu')
-// })
+
 router.get('/themnhanvien', (req,res) =>{
   res.render('qlnhanvien')
 })
@@ -58,11 +56,9 @@ router.get('/doanhthu1', (req,res) =>{
 })
 
 
-
-
 router.get('/hienkho', authController.hienkho);
 router.get('/xoahanghoa/:MaHH', authController.xoahanghoa);
-router.get('/suahanghoa', authController.suahanghoa);
+router.get('/suahanghoa/:MaHH', authController.suahanghoa);
 router.get('/hiennhanvien', authController.hiennhanvien);
 router.get('/hienmenu', authController.hienmenu);
 

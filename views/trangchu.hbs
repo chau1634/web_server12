@@ -98,9 +98,7 @@
                         </div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">{{#each dbUsername}}
-            {{this.Username}}
-            {{/each}}</h6>
+                        
                         <span>Admin</span>
                     </div>
                 </div>
@@ -195,10 +193,6 @@
                     </div>
                 </div>
             </nav>
-            <!-- Navbar End -->
-
-
-
             {{#if successMessage}}
             <div id="successMessage" class="hidden">
                 <div class="success-message">
@@ -446,24 +440,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <!-- Back to Top -->
             <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
         </div>
@@ -486,6 +462,19 @@
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+
+        <script>
+    // Hiển thị thông báo
+    const successMessage = document.getElementById('successMessage');
+    successMessage.classList.remove('hidden');
+
+
+
+    // Tắt thông báo sau 5 giây
+    setTimeout(() => {
+        successMessage.style.display = 'none';
+    }, 5000);
+</script>
 
 </body>
 

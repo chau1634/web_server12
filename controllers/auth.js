@@ -65,6 +65,8 @@ exports.kho = (req,res) => {
         });
     })
 }
+
+
 exports.nhacungcap = (req,res) => {
     console.log(req.body);
 
@@ -184,8 +186,7 @@ exports.login = (req, res) => {
             const dbUsername = results[0].Username;
             const successMessage = 'Login successful! Welcome, Admin.';
             return res.status(200).render('trangchu', { dbUsername,
-                successMessage
-                
+                successMessage   
             });
         } else {
             // Từ chối đăng nhập cho người dùng không có quyền
@@ -195,6 +196,7 @@ exports.login = (req, res) => {
         }
     });
 };
+
 
 exports.hienkho = (req, res) => {
     let successMessage = null;
@@ -215,6 +217,7 @@ exports.hienkho = (req, res) => {
     });
   };
 
+
   exports.hienloaihang = (req, res) => {
     let successMessage = null;
     const message = successMessage;
@@ -234,8 +237,7 @@ exports.hienkho = (req, res) => {
   };
 
 
-// Import module ejs
-const ejs = require('ejs');
+
 
 exports.hiennhacungcap = (req, res) => {
     let successMessage = null;
@@ -316,48 +318,45 @@ exports.xoanhacungcap = (req, res) => {
 
 
 // Thêm một endpoint mới để hiển thị trang sửa hàng hóa
-// exports.suahanghoa = (req, res) => {
-//     const maHangHoa = req.params.MaHH;
-//     console.log("mahanghoa", maHangHoa);
-    
+exports.suahanghoa = (req, res) => {
+    const maHangHoa = req.params.MaHH;
+    console.log("mahanghoa", maHangHoa);
 
-//     // Thực hiện truy vấn SQL để lấy thông tin chi tiết của hàng hóa dựa trên MaHH
-//     const sql = 'SELECT * FROM hanghoa WHERE MaHH = ?';
+    // Thực hiện truy vấn SQL để lấy thông tin chi tiết của hàng hóa dựa trên MaHH
+    const sql = 'SELECT * FROM hanghoa WHERE MaHH = ?';
 
-//     dB.query(sql, [maHangHoa], (error, results) => {
-//         if (error) {
-//             console.error('Lỗi khi lấy thông tin hàng hóa:', error);
-//             // Xử lý lỗi nếu cần
-//             return res.status(500).send('Internal Server Error');
-//         }
+    dB.query(sql, [maHangHoa], (error, results) => {
+        if (error) {
+            console.error('Lỗi khi lấy thông tin hàng hóa:', error);
+            // Xử lý lỗi nếu cần
+            return res.status(500).send('Internal Server Error');
+        }
 
-//         // Kết quả trả về sẽ là một mảng chứa thông tin của hàng hóa
-//         // Nếu mảng có phần tử, tức là hàng hóa được tìm thấy
-//         if (results.length > 0) {
-//             const hangHoa = results[0];
-//             // Truyền thông tin hàng hóa vào trang sửa hàng hóa
+        // Kết quả trả về sẽ là một mảng chứa thông tin của hàng hóa
+        // Nếu mảng có phần tử, tức là hàng hóa được tìm thấy
+        if (results.length > 0) {
+            const hangHoa = results[0];
+            console.log('thông tin hàng hóa:', hangHoa);
             
-//         res.render('suahanghoa', { hangHoa: hangHoa });
+            // Truyền thông tin hàng hóa vào trang sửa hàng hóa
+            res.render('hienthikho', { Hanghoa: hangHoa });
 
-//         console.log("hanghoa:",hangHoa);
-        
-
-
-//         } else {
-//             // Không tìm thấy hàng hóa với MaHH tương ứng
-//             res.status(404).send('Not Found');
-//         }
-//     });
-// };
-exports.suahanghoa = ((req, res) => {
-    var id = parseInt(req.query.id);
-    var sql=`SELECT * FROM hanghoa where MaHH = '${MaHH}'`;
-    conn.query(sql, function (err, data, fields) {
-        res.render('suahanghoa', {
-            hanghoa: data
-        });
+        } else {
+            // Không tìm thấy hàng hóa với MaHH tương ứng
+            res.status(404).send('Not Found');
+        }
     });
-})
+};
+
+// exports.suahanghoa = ((req, res) => {
+//     var id = parseInt(req.query.id);
+//     var sql=`SELECT * FROM hanghoa where MaHH = ?`;
+//     conn.query(sql, function (err, data, fields) {
+//         res.render('hienthikho', {
+//             hanghoa: data
+//         });
+//     });
+// })
 
 
 exports.hiennhanvien = (req, res) => {

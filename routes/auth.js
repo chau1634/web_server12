@@ -12,7 +12,7 @@ router.post('/nhacungcap', authController.nhacungcap)
 router.post('/loaihang', authController.loaihang)
 
 router.post('/doanhthu1', authController.doanhthu)
-router.post('/auth/login', authController.doanhthutrangchu)
+// router.post('/auth/login', authController.doanhthutrangchu)
 // router.get('/nhienkho', authController.hienkho);
 
 
