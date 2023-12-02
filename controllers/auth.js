@@ -110,6 +110,47 @@ exports.themnhanvien = (req,res) => {
         });
     })
 }
+exports.capnhatnhanvien = (req, res) => {
+    console.log(req.body);
+
+    const { manv, tennv, tendn, matkhau, sdt, diachi, chucvu } = req.body;
+
+    dB.query('SELECT MaNv FROM nhanvien WHERE MaNv = ?', [manv], async (error, results) => {
+        if (error) {
+            console.log(error);
+        }
+
+        if (!manv || !tennv || !matkhau || !tendn || !sdt || !diachi || !chucvu) {
+            return res.render('editttnhanvien', {
+                message: 'Vui lòng điền đầy đủ thông tin cập nhật nhân viên'
+            });
+        }
+
+        if (results && results.length === 0) {
+            return res.render('editttnhanvien', {
+                message: 'Mã nhân viên không tồn tại'
+            });
+        }
+
+        // Use UPDATE query to modify existing employee
+        dB.query(
+            'UPDATE nhanvien SET TenNv=?, TenDn=?, Matkhau=?, Sdt=?, Diachi=?, Chucvu=? WHERE MaNv=?',
+            [tennv, tendn, matkhau, sdt, diachi, chucvu, manv],
+            (error, results) => {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log(results);
+                    return res.render('editttnhanvien', {
+                        message: 'Cập nhật nhân viên thành công!'
+                    });
+                }
+            }
+        );
+    });
+};
+
+
 
 
 exports.login = (req, res) => {
@@ -194,10 +235,7 @@ exports.hienkho = (req, res) => {
             successMessage = 'Xóa hàng hóa thất bại.';
         } else {
             // Xóa thành công, có thể cập nhật giao diện người dùng, ví dụ: loại bỏ hàng từ danh sách hàng hóa.
-            successMessage = 'Xóa hàng hóa thành công.';
-            
-            
-            
+            successMessage = 'Xóa hàng hóa thành công.';           
         }
         return res.redirect('/hienkho');
     });
@@ -205,17 +243,68 @@ exports.hienkho = (req, res) => {
 exports.hiennhanvien = (req, res) => {
 
     dB.query('SELECT * FROM nhanvien', (err, results, fields) => {
-      if (err) {
+      if (err) {  
         console.error('Lỗi truy vấn:', err);
         return;
       }
       // Xử lý kết quả dữ liệu ở đây
       console.log('Dữ liệu từ cơ sở dữ liệu nhanvien:', results);
-      
       // Hiển thị trang HTML với dữ liệu từ cơ sở dữ liệu
-      res.render('hienthithongtinnv', { nhanvien: results});
+      res.render('hienthithongtinnv', { nhanvien: results, message: 'Xóa thành công!'});
     });
   };
+// exports.capnhatnhanvien = (req, res) => {
+//     dB.query('SELECT * FROM nhanvien', (err, results, fields) => {
+//         if (err) {
+//             console.error('Lỗi truy vấn:', err);
+//             return;
+//         }
+//         // Xử lý kết quả dữ liệu ở đây
+//         console.log('Dữ liệu từ cơ sở dữ liệu nhanvien:', results);
+//         // Hiển thị trang HTML với dữ liệu từ cơ sở dữ liệu và form cập nhật
+//         res.render('capnhatnhanvien', { nhanvien: results, message: '' });
+//     });
+// };
+
+  exports.xoanhanvien = (req, res) => {
+    const maNhanVien = req.params.MaNv; // Lấy mã hàng hóa từ đường dẫn URL
+
+    // Thực hiện truy vấn SQL DELETE để xóa hàng hóa từ CSDL
+    const sql = 'DELETE FROM nhanvien WHERE MaNv = ?';
+
+    dB.query(sql, [maNhanVien], (error, results) => {
+        if (error) {
+            console.error('Lỗi khi xóa Nhân viên:', error);
+            // Xử lý lỗi nếu cần
+            successMessage = 'Xóa Nhân viên thất bại.';
+        } else {
+            // Xóa thành công, có thể cập nhật giao diện người dùng, ví dụ: loại bỏ hàng từ danh sách hàng hóa.
+            successMessage = 'Xóa Nhân viên thành công.';
+        }
+        return res.redirect('/hiennhanvien');
+    });
+};
+
+// exports.xoanhanvien = (req, res) => {
+//     const maNhanVien = req.params.MaNv; // Lấy mã nhân viên từ đường dẫn URL
+
+//     // Thực hiện truy vấn SQL DELETE để xóa nhân viên từ CSDL
+//     const sql = 'DELETE FROM nhanvien WHERE MaNv = ?';
+
+//     dB.query(sql, [maNhanVien], (error, results) => {
+//         if (error) {
+//             console.error('Lỗi khi xóa nhân viên:', error);
+//             // Xử lý lỗi nếu cần
+//             successMessage = 'Xóa nhân viên thất bại.';
+//         } else {
+//             // Xóa thành công, có thể cập nhật giao diện người dùng, ví dụ: loại bỏ nhân viên từ danh sách nhân viên.
+//             successMessage = 'Xóa nhân viên thành công.';
+//         }
+//         return res.redirect('/qlnhanvien'); // Điều hướng sau khi xóa, bạn có thể thay đổi đường dẫn cần thiết.
+//     });
+// };
+
+
 exports.hienmenu = (req, res) => {
 
     dB.query('SELECT * FROM menu', (err, results, fields) => {

@@ -50,7 +50,10 @@ router.get('/themmenu', (req,res) =>{
 router.get('/hienkho', authController.hienkho);
 router.get('/xoahanghoa/:MaHH', authController.xoahanghoa);
 router.get('/hiennhanvien', authController.hiennhanvien);
+router.get('/xoanhanvien/:MaNv', authController.xoanhanvien);
+router.get('/capnhatnhanvien', authController.capnhatnhanvien);
 router.get('/hienmenu', authController.hienmenu);
+router.get('/editnhanvien', authController.capnhatnhanvien);
 
 
 module.exports = router;

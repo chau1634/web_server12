@@ -6,8 +6,10 @@ const router = express.Router();
 router.post('/login', authController.login)
 router.post('/kho', authController.kho)
 router.post('/themnhanvien', authController.themnhanvien)
+router.post('/editnhanvien', authController.capnhatnhanvien)
+router.get('/xoanhanvien', authController.xoanhanvien);
 router.post('/themmenu', authController.themmenu)
-// router.get('/hienkho', authController.hienkho);
+router.get('/hienkho', authController.hienkho);           
 
 
 

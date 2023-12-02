@@ -8,7 +8,7 @@ const helpers = require('handlebars-helpers')();
 
 const Port = 8000
 
-// DotENV Confing
+// DotENV Confing   
 dotenv.config({ path: './env'})
 
 // Static files

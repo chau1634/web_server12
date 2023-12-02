@@ -29,34 +29,6 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
-    <style>
-        .product-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.product-table th, .product-table td {
-  border: 1px solid #ccc;
-  padding: 8px;
-  text-align: left;
-}
-
-.product-table th {
-  background-color: #f5f5f5;
-  font-weight: bold;
-}
-
-.product-table tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-.product-table tr:hover {
-  background-color: #ddd;
-}
-
-
-
-    </style>
     
     
 
@@ -81,7 +53,7 @@
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
-                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                        <img class="rounded-circle" src="http://localhost:8000/img/user.jpg" alt="" style="width: 40px; height: 40px;">
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
@@ -99,16 +71,16 @@
                             <a href="element.html" class="dropdown-item">Other Elements</a>
                         </div>
                     </div> --}}
-                    <a href="/kho" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>Kho Hàng</a>
-                   <a href="/themnhanvien" class="nav-item nav-link  "><i class="fa fa-keyboard me-2"></i>Quản lý nhân viên</a>
-                    <a href="/themmenu" class="nav-item nav-link "><i class="fa fa-table me-2"></i>Quản lý Menu</a>
+                    <a href="/kho" class="nav-item nav-link "><i class="fa fa-th me-2"></i>Kho Hàng</a>
+                    <a href="/themnhanvien" class="nav-item nav-link active"><i class="fa fa-keyboard me-2"></i>Quản lý nhân viên</a>
+                    <a href="/themmenu" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Quản lý Menu</a>
                     <a href="qldoanhthu.hbs" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Quản lý doanh thu</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
+                        <a href="#" class="nav-item nav-link" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="signin.html" class="dropdown-item">Sign In</a>
                             <a href="signup.html" class="dropdown-item">Sign Up</a>
-                            <a href="404.html" class="dropdown-item active">404 Error</a>
+                           
                             <a href="blank.html" class="dropdown-item">Blank Page</a>
                         </div>
                     </div>
@@ -140,7 +112,7 @@
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">
                                 <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                    <img class="rounded-circle" src="http://localhost:8000/img/user.jpg" alt="" style="width: 40px; height: 40px;">
                                     <div class="ms-2">
                                         <h6 class="fw-normal mb-0">Jhon send you a message</h6>
                                         <small>15 minutes ago</small>
@@ -197,7 +169,7 @@
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                            <img class="rounded-circle me-lg-2" src="http://localhost:8000/img/user.jpg" alt="" style="width: 40px; height: 40px;">
                             <span class="d-none d-lg-inline-flex">John Doe</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
@@ -212,98 +184,60 @@
 
 
             <!-- 404 Start -->
-           {{!-- <div class="row">
-            <h1>Danh sách hàng hóa</h1>
-    <ul>
-        {{#each hanghoa}}
-        <li>
-            Mã hàng hóa: {{this.MaHH}}
-            Tên hàng hóa: {{this.TenHh}}
-            Giá sản phẩm: {{this.GiaSp}}
-            Mã nhà cung cấp: {{this.MaNcc}}
-            Mã loại hàng: {{this.MaLh}}
-            Ghi chú: {{this.Ghichu}}
-            Số lượng: {{this.Soluong}}
-            <!-- Thêm các trường khác tùy theo cơ sở dữ liệu của bạn -->
-        </li>
-        {{/each}}
-    </ul> --}}
-    {{!-- <div class="row">
-    <h1>Danh sách hàng hóa</h1>
-    <table class="product-table">
-        <thead>
-            <tr>
-                <th>Tên hàng hóa</th>
-                <th>Mã hàng hóa</th>
-                <th>Giá sản phẩm</th>
-                <th>Mã nhà cung cấp</th>
-                <th>Mã loại hàng</th>
-                <th>Ghi chú</th>
-                <th>Số lượng</th>
-                <!-- Thêm các trường khác tùy theo cơ sở dữ liệu của bạn -->
-            </tr>
-        </thead>
-        <tbody>
-            {{#each hanghoa}}
-            <tr>
-                <td>{{this.TenHh}}</td>
-                <td>{{this.MaHH}}</td>
-                <td>{{this.GiaSp}}</td>
-                <td>{{this.MaNcc}}</td>
-                <td>{{this.MaLh}}</td>
-                <td>{{this.Ghichu}}</td>
-                <td>{{this.Soluong}}</td>
-                <!-- Thêm các trường khác tùy theo cơ sở dữ liệu của bạn -->
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
-</div> --}}
-<div class="row" style=" width: 93%;">
-    <h1>Danh sách hàng hóa</h1> 
-            {{#if message}}
-             <div id="message" class="hidden"  style="background-color: rgb(0, 255, 179); width: 450px;">
-                <div class="success-message">
-               {{message}}
+           <div class="row">
+            <h1 style="text-align: center; margin-top: 50px; ">Cập Nhật Thông Tin Nhân Viên</h1>
+        <div class="col-lg-5 col-md-7 col-sm-9 col-11 mx-auto">
+            
+
+          <div class="grid">
+            <div class="grid-body">
+              <div class="row">
+                <div class="col-lg-15 col-md-15 col-sm-15 col-15 mx-auto form-wrapper">
+                <div class="form-container">
+                    
+                    <form action="/auth/capnhatnhanvien" method="POST" style="margin-top: 20px;">
+
+                    <div class="form-group input-rounded">
+                      <input type="text" class="form-control" placeholder="Mã nhân viên" id="email" name="manv" style=" margin-bottom: 5px; padding: 10px; top: 10px;"/>
+                    </div>
+                    <div class="form-group input-rounded">
+                      <input type="text" class="form-control" placeholder="Tên nhân viên" id="MaNcc" name="tennv" style=" margin-bottom: 5px; padding: 10px;"/>
+                    </div>
+                    <div class="form-group input-rounded">
+                      <input type="text" class="form-control" placeholder="Tên đăng nhập" id="MaLh" name="tendn" style=" margin-bottom: 5px;  padding: 10px;"/>
+                    </div>
+                    <div class="form-group input-rounded">
+                      <input type="text" class="form-control" placeholder="Số điện thoại" id="TenHh" name="sdt" style=" margin-bottom: 5px;  padding: 10px;"/>
+                    </div> 
+                    <div class="form-group input-rounded">
+                      <input type="text" class="form-control" placeholder="Địa chỉ" id="GiaSp" name="diachi" style=" margin-bottom: 5px;  padding: 10px;"/>
+                    </div>
+                    <div class="form-group input-rounded">
+                    <select class="form-control" id="chucvu" name="chucvu" style="margin-bottom: 5px; padding: 10px;">
+                       <option value="1">1. Admin</option>
+                       <option value="2">2. Nhân viên</option>
+                     </select>
+                   </div>
+
+                    <div class="form-group input-rounded">
+                      <input type="text" class="form-control" placeholder="Mật khẩu" id="Soluong" name="matkhau" style=" margin-bottom: 5px;  padding: 10px;"/>
+                    </div> 
+                    <div style="display: flex; justify-content: space-between;">
+    <button type="submit" class="btn btn-primary" style="flex: 1; margin-right: 10px;"> Lưu </button>
+    <a href="/hiennhanvien" class="btn btn-primary" style="flex: 1;">Danh sách nhân viên</a>
+</div>                   
+                  </form> 
+                  </form>   
+                  {{#if message}}
+                    <h4 class="alert alert-danger mt-4">{{message}}</h4>
+                  {{/if}}
+                  
                 </div>
-                </div>
-            {{/if}}
-
-    <table class="product-table">
-        <thead>
-            <tr>
-                <th>Mã hàng hóa</th>
-                <th>Tên hàng hóa</th>
-                <th>Giá sản phẩm</th>
-                <th>Mã nhà cung cấp</th>
-                <th>Mã loại hàng</th>
-                <th>Ghi chú</th>
-                <th>Số lượng</th>
-                <th>Thao tác</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each hanghoa}}
-            <tr>
-                <td>{{this.MaHH}}</td>
-                <td>{{this.TenHh}}</td>
-                <td>{{this.GiaSp}}</td>
-                <td>{{this.MaNcc}}</td>
-                <td>{{this.MaLh}}</td>
-                <td>{{this.Ghichu}}</td>
-                <td>{{this.Soluong}}</td>
-                <td>
-                    <a href="/edit/{{this.MaHH}}" style="background-color: rgb(242, 47, 47); color: #f5f5f5;">Edit</a>
-                    <a href="/xoahanghoa/{{this.MaHH}}" id="delete" class="delete-button" style="background-color: rgb(64, 64, 232); color: #f5f5f5;">Delete</a>
-                </td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
-</div>
-
-
-        
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
 
            
 
@@ -321,27 +255,9 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Đặt một biến để kiểm tra xem tương tác đã xảy ra hay chưa
-        
-
-        // Ẩn thông báo ban đầu
-        const message = document.getElementById('message');
-        message.style.display = 'none';
-
-        // Tương tác với thông báo (ví dụ: khi người dùng click vào nút)
-        const button = document.getElementById('delete');
-        button.addEventListener('click', function (event) {
-            tt = true;
-
-            // Hiển thị thông báo
-            message.style.display = 'block';
-
-        });
-        return false;
-    });
-</script >  
+   
+    
+    
 </body>
 
 </html>
