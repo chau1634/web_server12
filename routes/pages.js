@@ -51,6 +51,7 @@ router.get("/hiennhanvien", authController.hiennhanvien);
 router.get("/hienmenu", authController.hienmenu);
 router.get("/hienkho", authController.hienkho);
 router.get("/hiennhacungcap", authController.hiennhacungcap);
+router.get("/hiennhacungcap1", authController.hiennhacungcap1);
 router.get("/hienloaihang", authController.hienloaihang);
 
 router.get("/xoahanghoa/:MaHH", authController.xoahanghoa);

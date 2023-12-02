@@ -164,9 +164,16 @@
                     <div class="form-group input-rounded">
                       <input type="text" class="form-control" placeholder="Mã hàng hóa " id="email" name="maHH" style=" margin-bottom: 5px; padding: 10px; top: 10px;"/>
                     </div>
-                    <div class="form-group input-rounded">
+
+                    <select id="MaNcc" name="maNcc" style=" margin-bottom: 5px;">
+                        {{#each nhacungcap1}}
+                        <option name="maNcc" >{{this.MaNcc}}</option>
+                        {{/each}}
+                    </select>
+                    <a  href="/hiennhacungcap1">Cập nhật nhà cung cấp</a>
+                    {{!-- <div class="form-group input-rounded">
                       <input type="text" class="form-control" placeholder="Mã nhà cung cấp" id="MaNcc" name="maNcc" style=" margin-bottom: 5px; padding: 10px;"/>
-                    </div>
+                    </div> --}}
                     <div class="form-group input-rounded">
                       <input type="text" class="form-control" placeholder="Mã loại hàng" id="MaLh" name="maLh" style=" margin-bottom: 5px;  padding: 10px;"/>
                     </div>
@@ -187,9 +194,7 @@
                       <a href="/hienkho" class="btn btn-primary" style="flex: 1;">Kho</a>
 
                     </div>
-
                   </form> 
-                 
                   {{#if message}}
                     <h4 class="alert alert-danger mt-4">{{message}}</h4>
                   {{/if}}
@@ -201,11 +206,13 @@
         </div>
       </div> 
     
-    <!-- Template Javascript -->
+    
     <script src="js/main.js"></script> 
 
     
-    
+    <script>
+        
+
 </body>
 
 </html>

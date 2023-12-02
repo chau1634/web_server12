@@ -212,7 +212,6 @@ exports.login = (req, res) => {
         });
       }
 
-      // Lấy thông tin chức vụ của người dùng từ kết quả truy vấn
       const userRole = results[0].Chucvu;
 
       if (userRole === "1") {
@@ -280,6 +279,21 @@ exports.hiennhacungcap = (req, res) => {
   });
 };
 
+exports.hiennhacungcap1 = (req, res) => {
+  let successMessage = null;
+  const message = successMessage;
+
+  dB.query("SELECT * FROM nhacungcap", (err, results, fields) => {
+    if (err) {
+      console.error("Lỗi truy vấn:", err);
+      return;
+    }
+    // Xử lý kết quả dữ liệu ở đây
+    console.log("Dữ liệu từ cơ sở dữ liệu trang chu:", results);
+    // Hiển thị trang HTML với dữ liệu từ cơ sở dữ liệu
+    res.render("kho", { nhacungcap1: results });
+  });
+};
 exports.xoahanghoa = (req, res) => {
   const maHangHoa = req.params.MaHH; // Lấy mã hàng hóa từ đường dẫn URL
 
@@ -298,7 +312,6 @@ exports.xoahanghoa = (req, res) => {
     return res.redirect("/hienkho");
   });
 };
-
 exports.xoaloaihang = (req, res) => {
   const loaihang = req.params.TenLh; // Lấy mã hàng hóa từ đường dẫn URL
 
@@ -316,7 +329,6 @@ exports.xoaloaihang = (req, res) => {
     return res.redirect("/hienloaihang");
   });
 };
-
 exports.xoanhacungcap = (req, res) => {
   const nhacungcap = req.params.MaNcc; // Lấy mã hàng hóa từ đường dẫn URL
 
@@ -335,9 +347,6 @@ exports.xoanhacungcap = (req, res) => {
     return res.redirect("/hiennhacungcap");
   });
 };
-
-// Thêm một endpoint mới để hiển thị trang sửa hàng hóa
-
 exports.suahanghoa = (req, res) => {
   const resul = req.params.MaHH;
   const sql = "SELECT * FROM hanghoa WHERE MaHH = ?";
