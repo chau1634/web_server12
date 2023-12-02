@@ -304,6 +304,7 @@ exports.hienkho = (req, res) => {
         }
         return res.redirect('/hienkho');
     });
+  }
 
 exports.hiennhacungcap = (req, res) => {
   let successMessage = null;
@@ -402,7 +403,7 @@ exports.hiennhanvien = (req, res) => {
     }
     // Xử lý kết quả dữ liệu ở đây
     console.log("Dữ liệu từ cơ sở dữ liệu nhanvien:", results);
-
+  
 
     dB.query('SELECT * FROM nhanvien', (err, results, fields) => {
       if (err) {  
@@ -414,8 +415,8 @@ exports.hiennhanvien = (req, res) => {
       // Hiển thị trang HTML với dữ liệu từ cơ sở dữ liệu
       res.render('hienthithongtinnv', { nhanvien: results, message: 'Xóa thành công!'});
     });
-  };
-
+  });
+}
 
   exports.xoanhanvien = (req, res) => {
     const maNhanVien = req.params.MaNv; // Lấy mã hàng hóa từ đường dẫn URL
@@ -599,3 +600,4 @@ exports.suanhacungcap1 = (req, res) => {
     }
   });
 };
+  
