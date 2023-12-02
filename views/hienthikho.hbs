@@ -177,13 +177,16 @@
 <div class="row" style=" width: 93%;">
     <h1>Danh sách hàng hóa</h1> 
             {{#if message}}
-             <div id="message" class="hidden"  style="background-color: rgb(0, 255, 179); width: 450px;">
+             <div id="message" class="hidden"  >
                 <div class="success-message">
                {{message}}
                 </div>
                 </div>
             {{/if}}
 
+   {{#each product}}
+    <p>{{this.MaHH}}</p>
+   {{/each}}
     <table class="product-table">
         <thead>
             <tr>
@@ -209,41 +212,19 @@
                 <td>{{this.Soluong}}</td>
      
                 <td>
-                    <div>
-    <div class="modal-container">
-        <input id="modal-toggle" type="checkbox">
-      <label class="#" for="modal-toggle" style="height: 30px; color: #009CFF;">
-    {{!-- <a href="/{{MaHH}}" class="edit-link">Click me</a> --}}
-    heh
-</label>
-<label class="modal-backdrop" for="modal-toggle"></label>
-        <div class="modal-content">
-
-            <!-- Sử dụng id động cho các ô nhập -->
-            <input type="text" id="inputData_MaHH" placeholder="Mã hàng hóa" style="margin-top: 5px;"  value="{{hangHoa.MaHH}}" >
-            <input type="text" id="inputData_MaNCC" placeholder="Mã nhà cung cấp" style="margin-top: 5px;" value="{{hangHoa.MaNcc}}">
-            <input type="text" id="inputData_TenLoaiHang" placeholder="Tên loại hàng" style="margin-top: 5px;">
-            <input type="text" id="inputData_TenHangHoa" placeholder="Tên hàng hóa" style="margin-top: 5px;">
-            <input type="text" id="inputData_GiaTien" placeholder="Giá tiền" style="margin-top: 5px;">
-            <input type="text" id="inputData_GhiChu" placeholder="Ghi chú" style="margin-top: 5px;">
-            <input type="text" id="inputData_SoLuong" placeholder="Số lượng" style="margin-top: 5px;">
-
-            <div class="candeu">
-                <label class="modal-content-btn" for="modal-toggle" style="margin-top: 50px;">Sửa</label>
-                <label class="#" for="modal-toggle" style="margin-top: 20px;">Quay Lại</label>
-            </div>
-        </div>
-    </div>
-
                    <div style="margin-left: ;">
-
+                    <a href="/suahanghoa/{{this.MaHH}}">edit</a>
                     <a href="/xoahanghoa/{{this.MaHH}}" id="delete" class="delete-button" style=" color: #ff0000;text-decoration: none; margin-left: 10px;">Delete</a>
                    </div>
                 </td>
             </tr>
             {{/each}}
+
+            
         </tbody>
+
     </table>
+
 </div>
    
 
@@ -265,67 +246,32 @@
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    {{!-- <script src="js/main.js"></script> --}}
     <script>
 
         console.log("Data from server:", {{ hangHoa }});
+
 
     document.addEventListener('DOMContentLoaded', function () {
         // Đặt một biến để kiểm tra xem tương tác đã xảy ra hay chưa
         
 
         // Ẩn thông báo ban đầu
-        const message = document.getElementById('message');
-        message.style.display = 'none';
+        
 
         // Tương tác với thông báo (ví dụ: khi người dùng click vào nút)
         document.querySelectorAll('.delete-button').forEach(button => {
             button.addEventListener('click', (event) => {
                 event.preventDefault();
+                console.log()
                 const confirmation = confirm('Bạn có chắc chắn muốn xóa hàng hóa này không?');
                 if (confirmation) {
                     window.location.href = event.target.href;
                 }
             });
         });
-
-
-        document.addEventListener("DOMContentLoaded", function () {
-        // Lắng nghe sự kiện khi modal được mở
-        document.querySelectorAll('.edit-link').forEach(function (link) {
-            link.addEventListener('click', function (event) {
-                // Ngăn chặn hành vi mặc định của liên kết
-                event.preventDefault();
-
-                // Lấy giá trị MaHH từ thuộc tính href của thẻ a
-                var maHH = this.getAttribute('href');
-                console.log('Click event triggered for MaHH:', maHH);
-
-                fillData(maHH);
-            });
-        });
     });
 
-    function fillData(maHH) {
-        fetch(`/suahanghoa/${maHH}`)
-            .then(response => response.json())
-            .then(data => {
-                // Cập nhật giá trị của các ô nhập trong modal với dữ liệu từ server
-                document.getElementById("inputData_MaHH").value = data.MaHH;
-                document.getElementById("inputData_MaNCC").value = data.MaNCC;
-                document.getElementById("inputData_TenLoaiHang").value = data.TenLoaiHang;
-                document.getElementById("inputData_TenHangHoa").value = data.TenHangHoa;
-                document.getElementById("inputData_GiaTien").value = data.GiaTien;
-                document.getElementById("inputData_GhiChu").value = data.GhiChu;
-                document.getElementById("inputData_SoLuong").value = data.SoLuong;
-
-                // Mở modal
-                document.getElementById('modal-toggle').checked = true;
-            });
-    }
-
-
-    });
 </script>
 
 
