@@ -65,11 +65,11 @@
 <body>
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        {{!-- <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
-        </div>
+        </div> --}}
         <!-- Spinner End -->
 
 
@@ -95,7 +95,7 @@
                 
                    <a href="/themnhanvien" class="nav-item nav-link  "><i class="fa fa-keyboard me-2"></i>Quản lý nhân viên</a>
                     <a href="/themmenu" class="nav-item nav-link "><i class="fa fa-table me-2"></i>Quản lý Menu</a>
-                    <a href="qldoanhthu.hbs" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Quản lý doanh thu</a>
+                    <a href="/doanhthu1" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Quản lý doanh thu</a>
                     
                 </div>
             </nav>
@@ -177,13 +177,16 @@
 <div class="row" style=" width: 93%;">
     <h1>Danh sách hàng hóa</h1> 
             {{#if message}}
-             <div id="message" class="hidden"  style="background-color: rgb(0, 255, 179); width: 450px;">
+             <div id="message" class="hidden"  >
                 <div class="success-message">
                {{message}}
                 </div>
                 </div>
             {{/if}}
 
+   {{#each product}}
+    <p>{{this.MaHH}}</p>
+   {{/each}}
     <table class="product-table">
         <thead>
             <tr>
@@ -192,8 +195,6 @@
                 <th>Loại hàng</th>
                 <th>Tên hàng hóa</th>
                 <th>Giá sản phẩm</th>
-                <th>Mã nhà cung cấp</th>
-                <th>Mã loại hàng</th>
                 <th>Ghi chú</th>
                 <th>Số lượng</th>
                 <th>Thao tác</th>
@@ -207,19 +208,25 @@
                 <td>{{this.TenLh}}</td>
                 <td>{{this.TenHh}}</td>
                 <td>{{this.GiaSp}}</td>
-                <td>{{this.MaNcc}}</td>
-                <td>{{this.MaLh}}</td>
                 <td>{{this.Ghichu}}</td>
                 <td>{{this.Soluong}}</td>
+     
                 <td>
-                    <a href=`/suahanghoa/?MaHH=${hanghoa.MaHH}` style="background-color: rgb(242, 47, 47); color: #f5f5f5;">Edit</a>
-                    <a href="/xoahanghoa/{{this.MaHH}}" id="delete" class="delete-button" style="background-color: rgb(64, 64, 232); color: #f5f5f5;">Delete</a>
+                   <div style="margin-left: ;">
+                    <a href="/suahanghoa/{{this.MaHH}}">edit</a>
+                    <a href="/xoahanghoa/{{this.MaHH}}" id="delete" class="delete-button" style=" color: #ff0000;text-decoration: none; margin-left: 10px;">Delete</a>
+                   </div>
                 </td>
             </tr>
             {{/each}}
+
+            
         </tbody>
+
     </table>
+
 </div>
+   
 
 
         
@@ -239,20 +246,24 @@
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    {{!-- <script src="js/main.js"></script> --}}
     <script>
+
+        console.log("Data from server:", {{ hangHoa }});
+
+
     document.addEventListener('DOMContentLoaded', function () {
         // Đặt một biến để kiểm tra xem tương tác đã xảy ra hay chưa
         
 
         // Ẩn thông báo ban đầu
-        const message = document.getElementById('message');
-        message.style.display = 'none';
+        
 
         // Tương tác với thông báo (ví dụ: khi người dùng click vào nút)
         document.querySelectorAll('.delete-button').forEach(button => {
             button.addEventListener('click', (event) => {
                 event.preventDefault();
+                console.log()
                 const confirmation = confirm('Bạn có chắc chắn muốn xóa hàng hóa này không?');
                 if (confirmation) {
                     window.location.href = event.target.href;
@@ -260,6 +271,7 @@
             });
         });
     });
+
 </script>
 
 
@@ -269,5 +281,166 @@
     
     
 </body>
+<style>
+  .modal-container {
+    margin: 10px 5px;
+    padding-top: 0px;
+    position: relative;
+    display: inline-block;
+}
+  .modal-btn {
+    display: block;
+    margin: 0 auto;
+    color: #fff;
+    width: 160px;
+    height: 50px;
+    line-height: 50px;
+    background: #446cb3;
+    font-size: 22px;
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 5px 5px -5px #333;
+    transition: background 0.3s ease-in;
+  }
+  .modal-btn:hover {background: #365690;
+  }
+  .modal-content,
+  .modal-backdrop {
+    height: 0;
+    width: 0;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    cursor: pointer;
+    transition: opacity 0.2s ease-in;
+  }
+  .modal-close {
+    color: #aaa;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    padding-top: 3px;
+    background: #fff;
+    font-size: 16px;
+    width: 25px;
+    height: 25px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    
+  }
+  .modal-close:hover {
+    color: #333;
+  }
+  .modal-content-btn {
+    position: absolute;
+    text-align: center;
+    cursor: pointer;
+    bottom: 20px;
+    right: 30px;
+    background: #446cb3;
+    color: #fff;
+    width: 50px;
+    border-radius: 2px;
+    font-size: 14px;
+    height: 32px;
+    padding-top: 9px;
+    font-weight: normal;
+   
+  }
+  .modal-content-btn:hover {
+    color: #fff;
+    background: #365690;
+  }
+  #modal-toggle {
+    display: none;
+    &.active ~ .modal-backdrop,
+    &:checked ~ .modal-backdrop {
+      background-color: rgba(0, 0, 0, 0.6);
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 9;
+      visibility: visible;
+      opacity: 1;
+      transition: opacity 0.2s ease-in;
+    }
+    &.active ~ .modal-content,
+    &:checked ~ .modal-content {
+      opacity: 1;
+      background-color: #fff;
+      max-width: 400px;
+      width: 400px;
+      height: 280px;
+      padding: 10px 30px;
+      position: fixed;
+      left: calc(50% - 200px);
+      top: 12%;
+      border-radius: 4px;
+      z-index: 999;
+      pointer-events: auto;
+      cursor: auto;
+      visibility: visible;
+      box-shadow: 0 3px 7px rgba(0, 0, 0, 0.6);
+      @media (max-width: 400px) {
+        left: 0;
+      }
+    }
+  }
+  #modal-toggle {
+    display: none;
+}
+#modal-toggle.active ~ .modal-backdrop, #modal-toggle:checked ~ .modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.2s ease-in;
+}
+#modal-toggle.active ~ .modal-content, #modal-toggle:checked ~ .modal-content {
+    opacity: 1;
+    background-color: #fff;
+    max-width: 600px;
+    width: 600px;
+    height: 450px;
+    padding: 10px 30px;
+    position: fixed;
+    left: calc(50% - 200px);
+    top: 12%;
+    border-radius: 4px;
+    z-index: 999;
+    pointer-events: auto;
+    cursor: auto;
+    visibility: visible;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.6);
+}
+@media (max-width: 400px) {
+    #modal-toggle.active ~ .modal-content, #modal-toggle:checked ~ .modal-content {
+        left: 0;
+    }
+}
+.modal-content>input{
+    padding: 7px;
+    border-color: #ccc;
+    border-radius: 5px;
+    margin: 7px 0px;
+    color: black;
+}
+.candeu>label{
+    list-style: ;
+
+}
+
+
+</style>
 
 </html>

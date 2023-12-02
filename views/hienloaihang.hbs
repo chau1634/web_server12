@@ -113,7 +113,7 @@
                 
                    <a href="/themnhanvien" class="nav-item nav-link  "><i class="fa fa-keyboard me-2"></i>Quản lý nhân viên</a>
                     <a href="/themmenu" class="nav-item nav-link "><i class="fa fa-table me-2"></i>Quản lý Menu</a>
-                    <a href="qldoanhthu.hbs" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Quản lý doanh thu</a>
+                    <a href="/doanhthu1" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Quản lý doanh thu</a>
                     
                 </div>
             </nav>
@@ -211,7 +211,6 @@
                 <td>{{this.Ghichu}}</td>
 
                 <td>
-                    <a href="/edit/{{this.MaHH}}" class="edit-button">Edit</a>
                     <a href="/xoaloaihang/{{this.TenLh}}" id="delete" class="delete-button">Delete</a>
                 </td>
             </tr>
@@ -245,7 +244,7 @@
         button.addEventListener('click', (event) => {
             event.preventDefault();
             
-            const confirmation = confirm('Bạn có chắc chắn muốn xóa hàng hóa này không?');
+            const confirmation = confirm('Bạn có chắc chắn muốn xóa loại hàng này không này không?');
             
             if (confirmation) {
                 window.location.href = event.target.href;
