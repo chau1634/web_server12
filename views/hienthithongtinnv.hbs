@@ -187,6 +187,7 @@
                 <th>Số điện thoại</th>
                 <th>Địa chỉ</th>
                 <th>Chức vụ</th>
+                <th>Thao tác</th>
             </tr>
         </thead>
         <tbody>
@@ -199,17 +200,18 @@
                 <td>{{this.Sdt}}</td>
                 <td>{{this.Diachi}}</td>
                 <td>{{this.Chucvu}}</td>
+                <!-- Bên trong phần thân bảng nơi bạn hiển thị mỗi nhân viên -->
+                <td>
+                    <a href="/editnhanvien" style="background-color: ; color: rgb(64, 64, 232);">Sửa</a>
+                    <a href="/xoanhanvien/{{this.MaNv}}" id="delete" class="delete-button"
+                        style="background-color: ; color: rgb(242, 47, 47);">Xóa</a>
+                </td>
+
                 
             {{/each}}
         </tbody>
     </table>
 </div>
-
-        
-
-           
-
-      
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -223,14 +225,28 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-   
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Đặt một biến để kiểm tra xem tương tác đã xảy ra hay chưa
 
 
+            // Ẩn thông báo ban đầu
+            const message = document.getElementById('message');
+            message.style.display = 'none';
 
+            // Tương tác với thông báo (ví dụ: khi người dùng click vào nút)
+            const button = document.getElementById('delete');
+            button.addEventListener('click', function (event) {
+                tt = true;
 
-   
-    
-    
+                // Hiển thị thông báo
+                message.style.display = 'block';
+
+            });
+            return false;
+        });
+
+    </script>
 </body>
 
 </html>
