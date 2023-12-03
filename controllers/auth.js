@@ -8,7 +8,16 @@ const flash = require("connect-flash");
 const bodyPass = require("body-parser");
 
 const app = express();
-
+app.use(
+  session({
+    secret: "your-secret-key", // Replace with a secret key for session encryption
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 3600000, // Session timeout in milliseconds (1 hour in this example)
+    },
+  })
+);
 // MySQL Connection
 const dB = mysql.createConnection({
   host: process.env.DB_HOSTNAME,
@@ -26,7 +35,9 @@ dB.connect((error) => {
 });
 
 exports.kho = (req, res) => {
+  const { username, tenNv, role } = req.session.user || {};
   console.log(req.body);
+  console.log("Dữ liệu từ cơ sở dữ liệu nhanvien2:", tenNv);
 
   const { maHH, maNcc, maLh, tenHh, giaSp, ghichu, soluong } = req.body;
 
@@ -72,6 +83,7 @@ exports.kho = (req, res) => {
             return res.render("kho", {
               message: "Thêm hàng thành công!",
               Title: "Hien thi kho",
+              tenNv: [tenNv],
             });
           }
         }
@@ -199,29 +211,41 @@ exports.login = (req, res) => {
     async (error, results) => {
       if (error) {
         console.error("Database error:", error);
-        // Xử lý lỗi cơ sở dữ liệu và đưa ra thông báo lỗi cho người dùng
         return res.status(500).render("dangnhap", {
           message: "An error occurred while processing your request.",
         });
       }
 
       if (results.length === 0) {
-        // Không tìm thấy người dùng với tên đăng nhập và mật khẩu này
         return res.status(401).render("dangnhap", {
           message: "Username or Password is incorrect!",
         });
       }
 
-      // Lấy thông tin chức vụ của người dùng từ kết quả truy vấn
       const userRole = results[0].Chucvu;
 
       if (userRole === "1") {
-        // Chấp nhận đăng nhập cho người dùng với chức vụ "admin"
-        const dbUsername = results[0].Username;
+        // Store user information in session
+        req.session.user = {
+          username: results[0].TenDn,
+          tenNv: results[0].TenNv,
+          MaNv: results[0].MaNv,
+          Diachi: results[0].Diachi,
+          Sdt: results[0].Sdt,
+          Matkhau: results[0].Matkhau, // Add tenNv to the session
+          role: userRole,
+        };
+
+        console.log(`Logged in user: ${results[0].TenDn}`);
+        console.log(`Employee name: ${results[0].TenNv}`);
+        console.log(`Employee name: ${results[0].Sdt}`);
+        console.log(`Employee name: ${results[0].TenDn}`);
+
+        const dbUsername = results[0].TenDn;
         const successMessage = "Login successful! Welcome, Admin.";
+        // Redirect to the desired page
         return res.status(200).redirect("/auth/login");
       } else {
-        // Từ chối đăng nhập cho người dùng không có quyền
         return res.status(403).render("dangnhap", {
           message: "Bạn không đủ thẩm quyền để truy cập",
         });
@@ -231,6 +255,9 @@ exports.login = (req, res) => {
 };
 
 exports.hienkho = (req, res) => {
+  const { username, tenNv, role } = req.session.user || {};
+  console.log(req.body);
+  console.log("Dữ liệu từ cơ sở dữ liệu nhanvien2:", tenNv);
   let successMessage = null;
   const message = successMessage;
 
@@ -242,8 +269,38 @@ exports.hienkho = (req, res) => {
     // Xử lý kết quả dữ liệu ở đây
     console.log("Dữ liệu từ cơ sở dữ liệu kho:", results);
 
+    // Hiển thị trang HTML với dữ liệu từ cơ sở dữ liệu và thông tin người dùng
+    res.render("hienthikho", { hanghoa: results, tenNv: [tenNv] });
+
+  });
+};
+exports.myprofile = (req, res) => {
+  const { username, tenNv, role, MaNv,Sdt,Diachi,Matkhau } = req.session.user || {};
+  console.log(req.body);
+  console.log("Dữ liệu từ cơ sở dữ liệu nhanvien2:", tenNv);
+    console.log("Dữ liệu từ cơ sở dữ liệu nhanvien3:", username);
+  dB.query("SELECT * FROM nhanvien", (err, results, fields) => {
+    if (err) {
+      console.error("Lỗi truy vấn:", err);
+      return;
+    }
+    // Xử lý kết quả dữ liệu ở đây
+    console.log("Dữ liệu từ cơ sở dữ liệu nhanvien:", results);
+
+    // Lấy data Hinhanh
+    const Hinhanh = fields["Hinhanh"];
+    console.log("Data Hinhanh:", Hinhanh);
+
     // Hiển thị trang HTML với dữ liệu từ cơ sở dữ liệu
-    res.render("hienthikho", { hanghoa: results });
+    res.render("myprofile", {
+      Matkhau:[Matkhau],
+      nhanvien: results,
+      tenNv: [tenNv],
+      username: [username],
+      MaNv: [MaNv],
+      Sdt: [Sdt],
+      Diachi: [Diachi],
+    });
   });
 };
 
@@ -389,6 +446,9 @@ exports.doanhthu = (req, res) => {
   });
 };
 exports.doanhthutrangchu = (req, res) => {
+  // Retrieve user information from session
+  const { username, tenNv, role } = req.session.user || {};
+
   dB.query(
     "SELECT * FROM oder",
     (errDoanhThu, resultsDoanhThu, fieldsDoanhThu) => {
@@ -409,13 +469,22 @@ exports.doanhthutrangchu = (req, res) => {
           }
 
           // Xử lý kết quả dữ liệu nhanvien ở đây
-          console.log("Dữ liệu từ cơ sở dữ liệu nhanvien:", resultsNhanVien);
+         
+          console.log(
+            "Dữ liệu từ cơ sở dữ liệu nhanvien:",
+            
+            tenNv
+            
+          );
 
-          // Hiển thị trang HTML với dữ liệu từ cơ sở dữ liệu
+          // Hiển thị trang HTML với dữ liệu từ cơ sở dữ liệu và user information
           res.render("trangchu", {
             doanhthu: resultsDoanhThu,
             nhanvien: resultsNhanVien,
+            tenNv: [tenNv],
+            // Pass user information to the view
           });
+           
         }
       );
     }
@@ -528,3 +597,32 @@ exports.suanhacungcap1 = (req, res) => {
     }
   });
 };
+exports.changePass = (req, res) => {
+  const { username, tenNv, role, MaNv, Sdt, Diachi, Matkhau } =
+    req.session.user || {};
+  const { oldPassword, newPassword } = req.body;
+
+  // Check if oldPassword matches the current password
+  if (oldPassword !== Matkhau) {
+    return res.render("myprofile", {
+      errorMessage: "Mật khẩu cũ không đúng",
+    });
+  }
+
+  // Update the password in the database
+  const sql = "UPDATE nhanvien SET Matkhau = ? WHERE MaNv = ?";
+  dB.query(sql, [newPassword, MaNv], (err, results) => {
+    if (err) {
+      console.error("Error updating password:", err);
+      return res.status(500).send("Internal Server Error");
+    }
+
+    // Optionally, you might want to update the password in the session
+    req.session.user.Matkhau = newPassword;
+
+    res.render("myprofile", {
+      successMessage: "Đổi mật khẩu thành công",
+    });
+  });
+};
+
