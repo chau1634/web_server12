@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const authController = require("../controllers/auth");
-
 module.exports = router;
 
 const verifyToken = (req, res, next) => {
@@ -37,6 +36,7 @@ router.get("/kho", (req, res) => {
 router.get("/auth/login", (req, res) => {
   res.render("trangchu");
 });
+
 router.get("/themnhanvien", (req, res) => {
   res.render("qlnhanvien");
 });
@@ -44,12 +44,35 @@ router.get("/themmenu", (req, res) => {
   res.render("qlmenu");
 });
 
-router.get("/hienkho", authController.hienkho);
-router.get("/xoahanghoa/:MaHH", authController.xoahanghoa);
 router.get("/xoamenu/:MaMn", authController.xoamenu);
-router.get("/hiennhanvien", authController.hiennhanvien);
-router.get("/hienmenu", authController.hienmenu);
+
 router.get("/suamenu/:MaMn", authController.suamenu);
 router.get("/hiensuamenu/:MaMn", authController.hiensuamenu);
 
-module.exports = router;
+router.get("/nhacungcap", (req, res) => {
+  res.render("nhacungcap");
+});
+router.get("/loaihang", (req, res) => {
+  res.render("loaihang");
+});
+
+router.get("/doanhthu1", (req, res) => {
+  res.render("qldoanhthu");
+});
+
+router.get("/suahanghoa/:MaHH", authController.suahanghoa);
+router.get("/suanhacungcap1/:MaNcc", authController.suanhacungcap1);
+
+router.get("/hiennhanvien", authController.hiennhanvien);
+router.get("/hienmenu", authController.hienmenu);
+router.get("/hienkho", authController.hienkho);
+router.get("/hiennhacungcap", authController.hiennhacungcap);
+router.get("/hienloaihang", authController.hienloaihang);
+
+router.get("/xoahanghoa/:MaHH", authController.xoahanghoa);
+router.get("/xoaloaihang/:TenLh", authController.xoaloaihang);
+router.get("/xoanhacungcap/:MaNcc", authController.xoanhacungcap);
+router.get("/xoanhanvien/:MaNv", authController.xoanhanvien);
+
+router.get("/doanhthu", authController.doanhthu);
+router.get("/auth/login", authController.doanhthutrangchu);

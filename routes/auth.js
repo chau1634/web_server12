@@ -10,4 +10,11 @@ router.post("/themmenu", authController.themmenu);
 router.get("/hienkho", authController.hienkho);
 router.get("/hiensuamenu", authController.hiensuamenu);
 
+router.post("/nhacungcap", authController.nhacungcap);
+router.post("/loaihang", authController.loaihang);
+
+router.post("/doanhthu1", authController.doanhthu);
+router.post("/capNhatHangHoa", authController.capNhatHangHoa);
+router.post("/suanhacungcap", authController.suanhacungcap);
+
 module.exports = router;
