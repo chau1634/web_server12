@@ -150,7 +150,7 @@
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                            <img class="rounded-circle me-lg-2" src="http://localhost:8000/img/user.jpg" alt="" style="width: 40px; height: 40px;">
                             <span class="d-none d-lg-inline-flex">John Doe</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
@@ -326,6 +326,7 @@
                             };
                         }
                     });
+                    labels = Object.keys(doanhThuTheoNgay).sort();
 
                     var tbody = document.querySelector('.product-table tbody');
                     tbody.innerHTML = '';
@@ -397,8 +398,9 @@
                     });
 
                     // Display revenue for today, yesterday, average revenue, and total revenue
-                    var todayRevenue = doanhThuTheoNgay[labels[0]].tongThu;
-                    var yesterdayRevenue = doanhThuTheoNgay[labels[1]].tongThu;
+                    var lastTwoDates = labels.slice(-2);
+                    var todayRevenue = doanhThuTheoNgay[lastTwoDates[1]].tongThu;
+                    var yesterdayRevenue = doanhThuTheoNgay[lastTwoDates[0]].tongThu;
                     var averageRevenue = data.reduce((sum, value) => sum + value, 0) / data.length;
                     var totalRevenue = data.reduce((sum, value) => sum + value, 0);
 
