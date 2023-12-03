@@ -45,6 +45,7 @@ router.get("/doanhthu1", (req, res) => {
 });
 
 router.get("/suahanghoa/:MaHH", authController.suahanghoa);
+router.get("/suanhanvien/:MaNv", authController.suanhanvien);
 router.get("/suanhacungcap1/:MaNcc", authController.suanhacungcap1);
 
 router.get("/hiennhanvien", authController.hiennhanvien);
