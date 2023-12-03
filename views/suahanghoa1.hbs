@@ -25,10 +25,10 @@
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="../css/style.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
     
     
 
@@ -37,11 +37,11 @@
 <body>
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
-        {{!-- <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
-        </div> --}}
+        </div>
         <!-- Spinner End -->
 
 
@@ -66,8 +66,7 @@
                     <a href="/kho" class="nav-item nav-link active"><i class="fa fa-th me-2"></i>Kho Hàng</a>
                     <a href="/themnhanvien" class="nav-item nav-link  "><i class="fa fa-keyboard me-2"></i>Quản lý nhân viên</a>
                     <a href="/themmenu" class="nav-item nav-link "><i class="fa fa-table me-2"></i>Quản lý Menu</a>
-                    <a href="/doanhthu1" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Quản lý doanh thu</a>
-                   
+                    <a href="qldoanhthu.hbs" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Quản lý doanh thu</a>
                 </div>
             </nav>
         </div>
@@ -147,50 +146,58 @@
             <!-- Navbar End -->
 
 
-            
+            <!-- 404 Start -->
            <div class="row">
-            <h1 style="text-align: center; margin-top: 50px; ">Sửa hàng hóa</h1>
+            <h1 style="text-align: center; margin-top: 50px; ">Thông Tin Hàng Nhập Kho</h1>
         <div class="col-lg-5 col-md-7 col-sm-9 col-11 mx-auto">
+            
 
-        
           <div class="grid">
             <div class="grid-body">
               <div class="row">
                 <div class="col-lg-15 col-md-15 col-sm-15 col-15 mx-auto form-wrapper">
                 <div class="form-container">
-                               
-                  <form action="/auth/capNhatHangHoa" method="POST" style="margin-top: 20px;">                 
-                  {{#each product}}
+                    
+                    {{each data in hanghoa}}
+                    
+                  <form action="/auth/kho" method="POST" style="margin-top: 20px;">
                     <div class="form-group input-rounded">
-                      <input type="text" class="form-control" placeholder="Mã hàng hóa" id="email" value="{{this.MaHH}}" name="maHH1" style="margin-bottom: 5px; padding: 10px; top: 10px;" readonly />
-                    </div>
-
-                    <div class="form-group input-rounded">
-                      <input type="text" class="form-control" placeholder="Mã nhà cung cấp" id="MaNcc" value={{this.MaNcc}} name="maNcc1" style=" margin-bottom: 5px; padding: 10px;"/>
+                      <input type="text" class="form-control" placeholder="Mã hàng hóa " id="email" name="MaHH"  value= `${data.MaHH}`
+                      style=" margin-bottom: 5px; padding: 10px; top: 10px;"/>
                     </div>
                     <div class="form-group input-rounded">
-                      <input type="text" class="form-control" placeholder="Mã loại hàng" id="MaLh" value={{this.TenLh}} name="maLh1" style=" margin-bottom: 5px;  padding: 10px;"/>
+                      <input type="text" class="form-control" placeholder="Mã nhà cung cấp" id="MaNcc" name="maNcc" style=" margin-bottom: 5px; padding: 10px;"/>
                     </div>
                     <div class="form-group input-rounded">
-                      <input type="text" class="form-control" placeholder="Tên hàng hóa" id="TenHh" value={{this.TenHh}} name="tenHh1" style=" margin-bottom: 5px;  padding: 10px;"/>
+                      <input type="text" class="form-control" placeholder="Mã loại hàng" id="MaLh" name="maLh" style=" margin-bottom: 5px;  padding: 10px;"/>
+                    </div>
+                    <div class="form-group input-rounded">
+                      <input type="text" class="form-control" placeholder="Tên hàng hóa" id="TenHh" name="tenHh" style=" margin-bottom: 5px;  padding: 10px;"/>
                     </div> 
                     <div class="form-group input-rounded">
-                      <input type="text" class="form-control" placeholder="Giá sản phẩm" id="GiaSp" value={{this.GiaSp}} name="giaSp1" style=" margin-bottom: 5px;  padding: 10px;"/>
+                      <input type="text" class="form-control" placeholder="Giá sản phẩm" id="GiaSp" name="giaSp" style=" margin-bottom: 5px;  padding: 10px;"/>
                     </div>
                     <div class="form-group input-rounded">
-                      <input type="text" class="form-control" placeholder="Ghi chú" id="Ghichu" value={{this.Ghichu}} name="ghichu1" style=" margin-bottom: 5px;  padding: 10px;"/>
+                      <input type="text" class="form-control" placeholder="Ghi chú" id="Ghichu" name="ghichu" style=" margin-bottom: 5px;  padding: 10px;"/>
                     </div>
                     <div class="form-group input-rounded">
-                      <input type="text" class="form-control" placeholder="Số lượng" id="Soluong" value={{this.Soluong}} name="soluong1" style=" margin-bottom: 5px;  padding: 10px;"/>
+                      <input type="text" class="form-control" placeholder="Số lượng" id="Soluong" name="soluong" style=" margin-bottom: 5px;  padding: 10px;"/>
                     </div> 
                     <div style="display: flex; justify-content: space-between;">
-                      <button type="submit" class="btn btn-primary" style="flex: 1; margin-right: 10px;"> Sửa </button>
-                      <a href="/hienkho" class="btn btn-primary" style="flex: 1;">Kho</a>
-                    </div>
+    <button type="submit" class="btn btn-primary" style="flex: 1; margin-right: 10px;"> Thêm </button>
+    <a href="/hienkho" class="btn btn-primary" style="flex: 1;">Kho</a>
+
+</div>
+                
                   </form> 
-                  {{/each}}
 
 
+
+                  {{hanghoa.TenLh}}
+                  
+                  
+
+                
                   {{#if message}}
                     <h4 class="alert alert-danger mt-4">{{message}}</h4>
                   {{/if}}
@@ -201,10 +208,9 @@
           </div>
         </div>
       </div> 
-      
+      <!-- Trong file hiennhacungcap.ejs -->
 
-      
-     
+
 
            
 
@@ -222,7 +228,7 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-
+   
     
     
 </body>

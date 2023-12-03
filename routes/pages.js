@@ -62,4 +62,3 @@ router.get("/doanhthu", authController.doanhthu);
 router.get("/auth/login", authController.doanhthutrangchu);
 
 module.exports = router;
-
