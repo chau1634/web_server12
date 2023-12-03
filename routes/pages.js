@@ -45,6 +45,7 @@ router.get("/doanhthu1", (req, res) => {
 });
 
 router.get("/suahanghoa/:MaHH", authController.suahanghoa);
+router.get("/suanhanvien/:MaNv", authController.suanhanvien);
 router.get("/suanhacungcap1/:MaNcc", authController.suanhacungcap1);
 
 router.get("/hiennhanvien", authController.hiennhanvien);
@@ -56,8 +57,13 @@ router.get("/hienloaihang", authController.hienloaihang);
 router.get("/xoahanghoa/:MaHH", authController.xoahanghoa);
 router.get("/xoaloaihang/:TenLh", authController.xoaloaihang);
 router.get("/xoanhacungcap/:MaNcc", authController.xoanhacungcap);
+router.get("/xoanhanvien/:MaNv", authController.xoanhanvien);
 
 router.get("/doanhthu", authController.doanhthu);
 router.get("/auth/login", authController.doanhthutrangchu);
+
 router.get("/myprofile", authController.myprofile);
+
+
 module.exports = router;
+
