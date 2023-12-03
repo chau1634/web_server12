@@ -66,11 +66,7 @@
 <body>
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
+       
         <!-- Spinner End -->
 
 
@@ -202,7 +198,7 @@
                 <td>{{this.Chucvu}}</td>
                 <!-- Bên trong phần thân bảng nơi bạn hiển thị mỗi nhân viên -->
                 <td>
-                    <a href="/editnhanvien" style="background-color: ; color: rgb(64, 64, 232);">Sửa</a>
+                    <a href="/suanhanvien/{{this.MaNv}}" >Sửa</a>
                     <a href="/xoanhanvien/{{this.MaNv}}" id="delete" class="delete-button"
                         style="background-color: ; color: rgb(242, 47, 47);">Xóa</a>
                 </td>
@@ -224,29 +220,34 @@
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    {{!-- <script src="js/main.js"></script> --}}
     <script>
+
+        console.log("Data from server:", {{ hangHoa }});
+
+
         document.addEventListener('DOMContentLoaded', function () {
             // Đặt một biến để kiểm tra xem tương tác đã xảy ra hay chưa
 
 
             // Ẩn thông báo ban đầu
-            const message = document.getElementById('message');
-            message.style.display = 'none';
+
 
             // Tương tác với thông báo (ví dụ: khi người dùng click vào nút)
-            const button = document.getElementById('delete');
-            button.addEventListener('click', function (event) {
-                tt = true;
-
-                // Hiển thị thông báo
-                message.style.display = 'block';
-
+            document.querySelectorAll('.delete-button').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    console.log()
+                    const confirmation = confirm('Bạn có chắc chắn muốn xóa hàng hóa này không?');
+                    if (confirmation) {
+                        window.location.href = event.target.href;
+                    }
+                });
             });
-            return false;
         });
 
     </script>
+
 </body>
 
 </html>

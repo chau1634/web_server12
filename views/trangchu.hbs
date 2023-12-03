@@ -43,31 +43,6 @@
             text-align: center;
 
         }
-
-        .product-table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        .product-table th,
-        .product-table td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
-        }
-
-        .product-table th {
-            background-color: #f5f5f5;
-            font-weight: bold;
-        }
-
-        .product-table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        .product-table tr:hover {
-            background-color: #ddd;
-        }
     </style>
 </head>
 
@@ -98,7 +73,9 @@
                         </div>
                     </div>
                     <div class="ms-3">
-                        
+                        <h6 class="mb-0">{{#each dbUsername}}
+                            {{this.Username}}
+                            {{/each}}</h6>
                         <span>Admin</span>
                     </div>
                 </div>
@@ -109,10 +86,13 @@
                     <a href="/themnhanvien" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Quản lý nhân
                         viên</a>
                     <a href="/themmenu" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Quản lý Menu</a>
-                    <a href="/doanhthu1" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Quản lý doanh thu</a>
-                    <a href="/nhacungcap" class="nav-item nav-link"><i class="fas fa-store me-2"></i>Nhà cung cấp</a>
-                    <a href="/loaihang" class="nav-item nav-link"><i class="fas fa-tags me-2"></i>Loại hàng</a>
-                    
+                    <a href="/doanhthu1" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Quản lý doanh
+                        thu</a>
+                    <a href="/nhacungcap" class="nav-item nav-link"><i class="fa fa-building me-2"></i>Nhà cung cấp</a>
+
+                    <a href="/loaihang" class="nav-item nav-link"><i class="fa fa-shopping-bag me-2"></i>Loại hàng</a>
+
+
                 </div>
             </nav>
         </div>
@@ -134,7 +114,7 @@
                 </form>
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
-                        
+
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">
                                 <div class="d-flex align-items-center">
@@ -177,11 +157,11 @@
                             <i class="fa fa-bell me-lg-2"></i>
                             <span class="d-none d-lg-inline-flex">Notificatin</span>
                         </a>
-                    
+
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="img/user.jpg" alt=""
+                            <img class="rounded-circle me-lg-2" src="http://localhost:8000/img/user.jpg" alt=""
                                 style="width: 40px; height: 40px;">
                             <span class="d-none d-lg-inline-flex">John Doe</span>
                         </a>
@@ -193,7 +173,16 @@
                     </div>
                 </div>
             </nav>
-            
+            <!-- Navbar End -->
+
+
+            {{#if successMessage}}
+            <div id="successMessage" class="hidden">
+                <div class="success-message">
+                    {{successMessage}}
+                </div>
+            </div>
+            {{/if}}
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
                     <div class="col-sm-6 col-xl-3">
@@ -347,6 +336,7 @@
                             };
                         }
                     });
+                    labels = Object.keys(doanhThuTheoNgay).sort();
 
                     var tbody = document.querySelector('.product-table tbody');
                     tbody.innerHTML = '';
@@ -418,17 +408,36 @@
                     });
 
                     // Display revenue for today, yesterday, average revenue, and total revenue
-                    var todayRevenue = doanhThuTheoNgay[labels[0]].tongThu;
-                    var yesterdayRevenue = doanhThuTheoNgay[labels[1]].tongThu;
+                    var lastTwoDates = labels.slice(-2);
+                    var todayRevenue = doanhThuTheoNgay[lastTwoDates[1]].tongThu;
+                    var yesterdayRevenue = doanhThuTheoNgay[lastTwoDates[0]].tongThu;
                     var averageRevenue = data.reduce((sum, value) => sum + value, 0) / data.length;
                     var totalRevenue = data.reduce((sum, value) => sum + value, 0);
 
-                    document.getElementById('day1Revenue').innerText = `$${todayRevenue.toFixed(0)}`;
-                    document.getElementById('day2Revenue').innerText = `$${yesterdayRevenue.toFixed(0)}`;
-                    document.getElementById('todayRevenueValue').innerText = `$${averageRevenue.toFixed(0)}`;
-                    document.getElementById('totalRevenueValue').innerText = `$${totalRevenue.toFixed(0)}`;
+                    document.getElementById('day1Revenue').innerText = `${todayRevenue.toFixed(0)}VND`;
+                    document.getElementById('day2Revenue').innerText = `${yesterdayRevenue.toFixed(0)}VND`;
+                    document.getElementById('todayRevenueValue').innerText = `${averageRevenue.toFixed(0)}VND`;
+                    document.getElementById('totalRevenueValue').innerText = `${totalRevenue.toFixed(0)}VND`;
                 });
             </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -456,18 +465,17 @@
         <script src="js/main.js"></script>
 
         <script>
-    // Hiển thị thông báo
-    const successMessage = document.getElementById('successMessage');
-    successMessage.classList.remove('hidden');
+            // Hiển thị thông báo
+            const successMessage = document.getElementById('successMessage');
+            successMessage.classList.remove('hidden');
 
 
 
-    // Tắt thông báo sau 5 giây
-    setTimeout(() => {
-        successMessage.style.display = 'none';
-    }, 5000);
-</script>
-
+            // Tắt thông báo sau 5 giây
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 5000);
+        </script>
 </body>
 
 </html>
