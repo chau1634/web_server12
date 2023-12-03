@@ -284,7 +284,7 @@ exports.hienkho = (req, res) => {
       
       // Hiển thị trang HTML với dữ liệu từ cơ sở dữ liệu
       res.render('hienthikho', { hanghoa: results, 
-        message: 'Xóa thành công !' });
+        });
     });
   };
   exports.xoahanghoa = (req, res) => {
@@ -395,6 +395,21 @@ exports.suahanghoa = (req, res) => {
   });
 
 };
+exports.suanhanvien = (req, res) => {
+  const manv = req.params.MaNv;
+  const sql = "SELECT * FROM nhanvien WHERE MaNv = ?";
+
+  dB.query(sql, manv, (err, results) => {
+    if (err) {
+      console.error("Lỗi truy vấn:", err);
+      return;
+    }
+    // Xử lý kết quả dữ liệu ở đây
+    console.log("Employee: ", results);
+    res.render("editttnhanvien", { employee: results });
+  });
+};
+
 exports.hiennhanvien = (req, res) => {
   dB.query("SELECT * FROM nhanvien", (err, results, fields) => {
     if (err) {
@@ -557,6 +572,37 @@ exports.capNhatHangHoa = (req, res) => {
     }
   );
 };
+exports.capNhatNhanVien = (req, res) => {
+  console.log(req.body);
+
+  const { manv, tennv, tendn, matkhau, sdt, diachi, chucvu } = req.body;
+
+  if (!manv || !tennv || !tendn || !matkhau || !sdt || !diachi || !chucvu) {
+    return res.render("edittnhanvien", {
+      message: "Vui lòng điền đầy đủ thông tin",
+    });
+  }
+
+  dB.query(
+    "UPDATE nhanvien SET TenNv=?, TenDn=?, Matkhau=?, Sdt=?, Diachi=?, Chucvu=? WHERE MaNv=?",
+    [tennv, tendn, matkhau, sdt, diachi, chucvu, manv],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.render("editttnhanvien", {
+          message: "Cập nhật nhân viên thất bại",
+        });
+      } else {
+        console.log(results);
+        return res.render("editttnhanvien", {
+          message: "Cập nhật nhân viên thành công !",
+          Title: "Hien thi danh sách nhân viên",
+        });
+      }
+    }
+  );
+};
+
 exports.suanhacungcap = (req, res) => {
   console.log(req.body);
 
