@@ -212,6 +212,22 @@ exports.hienmenu = (req, res) => {
     res.render("hienmenu", { menu: results, message: "Xóa thành công !" });
   });
 };
+exports.hiensuamenu = (req, res) => {
+  let successMessage = null;
+  const message = successMessage;
+
+  dB.query("SELECT * FROM menu", (err, results, fields) => {
+    if (err) {
+      console.error("Lỗi truy vấn:", err);
+      return;
+    }
+    // Xử lý kết quả dữ liệu ở đây
+    console.log("Dữ liệu từ cơ sở dữ liệu menu:", results);
+
+    // Hiển thị trang HTML với dữ liệu từ cơ sở dữ liệu
+    res.render("suamenu", { menu: results, message: "sửa thành công !" });
+  });
+};
 exports.xoahanghoa = (req, res) => {
   const maHangHoa = req.params.MaHH; // Lấy mã hàng hóa từ đường dẫn URL
 
@@ -324,45 +340,46 @@ exports.themmenu = (req, res) => {
     }
   );
 };
-app.get("/suamenu/:MaMn", (req, res) => {
-  const maMn = req.params.MaMn;
+exports.suamenu = (req, res) => {
+  console.log(req.body);
 
-  // Fetch the menu item details based on MaMn from the database
-  dB.query("SELECT * FROM menu WHERE MaMn = ?", [maMn], (err, results) => {
-    if (err) {
-      console.error("Error fetching menu item details:", err);
-      return res.status(500).send("Internal Server Error");
-    }
+  const { mamn, tenmn, giatien } = req.body; // Change mamn to MaMn
 
-    if (results.length === 0) {
-      // Handle case where menu item with given MaMn is not found
-
-      return res.status(404).send("Menu item not found");
-    }
-
-    // Render the edit form with the menu item details
-    res.render("suamenu", { menu: results[0] });
-  });
-});
-
-// Add this route to handle the update form submission
-app.post("/suamenu/:MaMn", (req, res) => {
-  const maMn = req.params.MaMn;
-
-  const { tenmn, giatien } = req.body;
-
-  // Update the menu item details in the database
   dB.query(
-    "UPDATE menu SET TenDu = ?, Giatien = ? WHERE MaMn = ?",
-    [tenmn, giatien, maMn],
-    (err, results) => {
-      if (err) {
-        console.error("Error updating menu item details:", err);
-        return res.status(500).send("Internal Server Error");
+    "SELECT MaMn FROM menu WHERE MaMn = ?",
+    [mamn],
+    async (error, results) => {
+      if (error) {
+        console.log("SELECT FROM menu WHERE MaMn = ?", { mamn });
+        return res.render("qlmenu", {
+          message: "Lỗi khi kiểm tra mã đồ uống.",
+        });
       }
 
-      // Redirect to the menu page or display a success message
-      res.redirect("/hienmenu");
+      if (!results || results.length === 0) {
+        return res.render("qlmenu", {
+          message: "Không tìm thấy đồ uống có mã tương ứng.",
+        });
+      }
+
+      // Thực hiện cập nhật thông tin đồ uống
+      dB.query(
+        "UPDATE menu SET TenDu = ?, Giatien = ? WHERE MaMn = ?",
+        [tenmn, giatien, mamn],
+        (error, updateResults) => {
+          if (error) {
+            console.log("Error during query:", error);
+            return res.render("qlmenu", {
+              message: "Lỗi khi cập nhật đồ uống.",
+            });
+          } else {
+            console.log("Query results:", updateResults);
+            return res.render("qlmenu", {
+              message: "Cập nhật đồ uống thành công !",
+            });
+          }
+        }
+      );
     }
   );
-});
+};

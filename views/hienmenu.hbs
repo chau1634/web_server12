@@ -29,7 +29,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
     <style>
         .product-table {
   border-collapse: collapse;
@@ -219,6 +219,7 @@
                 <th>Mã Menu</th>
                 <th>Tên đồ uống</th>
                 <th>Giá tiền</th>
+                <th>Tên loại hàng</th>
                 <th>Thao tác</th>
                 
             </tr>
@@ -229,8 +230,9 @@
                 <td>{{this.MaMn}}</td>
                 <td>{{this.TenDu}}</td>
                 <td>{{this.Giatien}}</td>
+                <td>{{this.TenLh}}</td>
                 <td>
-                    <a href="/edit/{{this.MaMn}}" style="background-color: rgb(242, 47, 47); color: #f5f5f5;">Edit</a>
+                    <a href="/hiensuamenu/{{this.MaMn}}" style="background-color: rgb(242, 47, 47); color: #f5f5f5;">Edit</a>
                     <a href="/xoamenu/{{this.MaMn}}" id="delete" class="delete-button"
                         style="background-color: rgb(64, 64, 232); color: #f5f5f5;">Delete</a>
                 </td>

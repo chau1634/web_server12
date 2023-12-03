@@ -25,10 +25,10 @@
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
     
     
 
@@ -212,19 +212,20 @@
                     <div class="form-group input-rounded">
                       <input type="text" class="form-control" placeholder="Giá tiền" id="Giatien" name="giatien" style=" margin-bottom: 5px;  padding: 10px;"/>
                     </div>
+                    <div class="form-group input-rounded">
+                        <select class="form-control" id="TenLh" name="tenlh" style="margin-bottom: 5px; padding: 10px;">
+                            <option value="">Chọn loại hàng</option>
+                            <option value="loai1">Loại 1</option>
+                            <option value="loai2">Loại 2</option>
+                            <!-- Thêm các option khác nếu cần -->
+                        </select>
+                    </div>
                 
                     <div style="display: flex; justify-content: space-between;">
     <button type="submit" class="btn btn-primary" style="flex: 1; margin-right: 10px;"> Thêm </button>
     <a href="/hienmenu" class="btn btn-primary" style="flex: 1;">Menu</a>   
-</div>
-
-
-                    
-                    
+</div>                
                   </form> 
-                  
-
-                
                   {{#if message}}
                     <h4 class="alert alert-danger mt-4">{{message}}</h4>
                   {{/if}}

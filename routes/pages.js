@@ -3,6 +3,8 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const authController = require("../controllers/auth");
 
+module.exports = router;
+
 const verifyToken = (req, res, next) => {
   const token = req.cookies.jwt; // cookiesde ki jwt adında ki token kodunu token değişkenine gönder.
   try {
@@ -47,5 +49,7 @@ router.get("/xoahanghoa/:MaHH", authController.xoahanghoa);
 router.get("/xoamenu/:MaMn", authController.xoamenu);
 router.get("/hiennhanvien", authController.hiennhanvien);
 router.get("/hienmenu", authController.hienmenu);
+router.get("/suamenu/:MaMn", authController.suamenu);
+router.get("/hiensuamenu/:MaMn", authController.hiensuamenu);
 
 module.exports = router;
