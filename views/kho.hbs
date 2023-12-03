@@ -160,41 +160,50 @@
                 <div class="form-container">
                                
                   <form action="/auth/kho" method="POST" style="margin-top: 20px;">                 
-                
-                    <div class="form-group input-rounded">
-                      <input type="text" class="form-control" placeholder="Mã hàng hóa " id="email" name="maHH" style=" margin-bottom: 5px; padding: 10px; top: 10px;"/>
-                    </div>
+  <div class="form-group input-rounded">
+    <input type="text" class="form-control" placeholder="Mã hàng hóa" id="maHH" name="maHH" style="margin-bottom: 5px; padding: 10px; top: 10px;"/>
+  </div>
 
-                    <select id="MaNcc" name="maNcc" style=" margin-bottom: 5px;">
-                        {{#each nhacungcap1}}
-                        <option name="maNcc" >{{this.MaNcc}}</option>
-                        {{/each}}
-                    </select>
-                    <a  href="/hiennhacungcap1">Cập nhật nhà cung cấp</a>
-                    {{!-- <div class="form-group input-rounded">
-                      <input type="text" class="form-control" placeholder="Mã nhà cung cấp" id="MaNcc" name="maNcc" style=" margin-bottom: 5px; padding: 10px;"/>
-                    </div> --}}
-                    <div class="form-group input-rounded">
-                      <input type="text" class="form-control" placeholder="Mã loại hàng" id="MaLh" name="maLh" style=" margin-bottom: 5px;  padding: 10px;"/>
-                    </div>
-                    <div class="form-group input-rounded">
-                      <input type="text" class="form-control" placeholder="Tên hàng hóa" id="TenHh" name="tenHh" style=" margin-bottom: 5px;  padding: 10px;"/>
-                    </div> 
-                    <div class="form-group input-rounded">
-                      <input type="text" class="form-control" placeholder="Giá sản phẩm" id="GiaSp" name="giaSp" style=" margin-bottom: 5px;  padding: 10px;"/>
-                    </div>
-                    <div class="form-group input-rounded">
-                      <input type="text" class="form-control" placeholder="Ghi chú" id="Ghichu" name="ghichu" style=" margin-bottom: 5px;  padding: 10px;"/>
-                    </div>
-                    <div class="form-group input-rounded">
-                      <input type="text" class="form-control" placeholder="Số lượng" id="Soluong" name="soluong" style=" margin-bottom: 5px;  padding: 10px;"/>
-                    </div> 
-                    <div style="display: flex; justify-content: space-between;">
-                      <button type="submit" class="btn btn-primary" style="flex: 1; margin-right: 10px;"> Thêm </button>
-                      <a href="/hienkho" class="btn btn-primary" style="flex: 1;">Kho</a>
+  <select id="MaNcc" name="maNcc" style="margin-bottom: 5px; width: 100px;">
+    {{#each data}}
+      {{#if this.MaNcc}}
+        <option value="{{this.MaNcc}}">{{this.MaNcc}}</option>
+      {{/if}}
+    {{/each}}
+  </select>
 
-                    </div>
-                  </form> 
+  <a href="/hiennhacungcap1">Cập nhật</a>
+
+  <select id="MaLh" name="maLh" style="margin-bottom: 5px; width: 100px;">
+    {{#each data}}
+      {{#if this.TenLh}}
+        <option value="{{this.TenLh}}">{{this.TenLh}}</option>
+      {{/if}}
+    {{/each}}
+  </select>
+
+  <div class="form-group input-rounded">
+    <input type="text" class="form-control" placeholder="Tên hàng hóa" id="TenHh" name="tenHh" style="margin-bottom: 5px; padding: 10px;"/>
+  </div> 
+
+  <div class="form-group input-rounded">
+    <input type="text" class="form-control" placeholder="Giá sản phẩm" id="GiaSp" name="giaSp" style="margin-bottom: 5px; padding: 10px;"/>
+  </div>
+
+  <div class="form-group input-rounded">
+    <input type="text" class="form-control" placeholder="Ghi chú" id="Ghichu" name="ghichu" style="margin-bottom: 5px; padding: 10px;"/>
+  </div>
+
+  <div class="form-group input-rounded">
+    <input type="text" class="form-control" placeholder="Số lượng" id="Soluong" name="soluong" style="margin-bottom: 5px; padding: 10px;"/>
+  </div> 
+
+  <div style="display: flex; justify-content: space-between;">
+    <button type="submit" class="btn btn-primary" style="flex: 1; margin-right: 10px;"> Thêm </button>
+    <a href="/hienkho" class="btn btn-primary" style="flex: 1;">Kho</a>
+  </div>
+</form>
+
                   {{#if message}}
                     <h4 class="alert alert-danger mt-4">{{message}}</h4>
                   {{/if}}

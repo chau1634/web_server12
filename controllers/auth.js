@@ -211,7 +211,6 @@ exports.login = (req, res) => {
           message: "Username or Password is incorrect!",
         });
       }
-
       const userRole = results[0].Chucvu;
 
       if (userRole === "1") {
@@ -262,6 +261,58 @@ exports.hienloaihang = (req, res) => {
     res.render("hienloaihang", { loaihang: results });
   });
 };
+//hienbenmanhinhkho
+// exports.hienloaihang1 = (req, res) => {
+//   let successMessage = null;
+//   const message = successMessage;
+
+//   dB.query("SELECT * FROM loaihang", (err, results, fields) => {
+//     if (err) {
+//       console.error("Lỗi truy vấn:", err);
+//       return;
+//     }
+//     // Xử lý kết quả dữ liệu ở đây
+//     console.log("Dữ liệu từ cơ sở dữ liệu loaihang:", results);
+
+//     // Hiển thị trang HTML với dữ liệu từ cơ sở dữ liệu
+//     res.render("kho", { loaihang1: results });
+//   });
+// };
+
+exports.hienkho = (req, res) => {
+  let successMessage = null;
+  const message = successMessage;
+
+  dB.query("SELECT * FROM hanghoa", (err, results, fields) => {
+    if (err) {
+      console.error("Lỗi truy vấn:", err);
+      return;
+    }
+    // Xử lý kết quả dữ liệu ở đây
+    console.log("Dữ liệu từ cơ sở dữ liệu kho:", results);
+
+    // Hiển thị trang HTML với dữ liệu từ cơ sở dữ liệu
+    res.render("hienthikho", { hanghoa: results });
+  });
+};
+exports.xoahanghoa = (req, res) => {
+  const maHangHoa = req.params.MaHH; // Lấy mã hàng hóa từ đường dẫn URL
+
+  // Thực hiện truy vấn SQL DELETE để xóa hàng hóa từ CSDL
+  const sql = "DELETE FROM hanghoa WHERE MaHH = ?";
+
+  dB.query(sql, [maHangHoa], (error, results) => {
+    if (error) {
+      console.error("Lỗi khi xóa hàng hóa:", error);
+      // Xử lý lỗi nếu cần
+      successMessage = "Xóa hàng hóa thất bại.";
+    } else {
+      // Xóa thành công, có thể cập nhật giao diện người dùng, ví dụ: loại bỏ hàng từ danh sách hàng hóa.
+      successMessage = "Xóa hàng hóa thành công.";
+    }
+    return res.redirect("/hienkho");
+  });
+};
 
 exports.hiennhacungcap = (req, res) => {
   let successMessage = null;
@@ -280,20 +331,23 @@ exports.hiennhacungcap = (req, res) => {
 };
 
 exports.hiennhacungcap1 = (req, res) => {
-  let successMessage = null;
-  const message = successMessage;
+  dB.query(
+    "SELECT MaNcc, NULL AS TenLh FROM nhacungcap WHERE MaNcc IS NOT NULL UNION ALL SELECT NULL AS MaNcc, TenLh FROM loaihang WHERE TenLh IS NOT NULL;",
+    (err, results, fields) => {
+      if (err) {
+        console.error("Lỗi truy vấn:", err);
+        return;
+      }
 
-  dB.query("SELECT * FROM nhacungcap", (err, results, fields) => {
-    if (err) {
-      console.error("Lỗi truy vấn:", err);
-      return;
+      // Xử lý kết quả dữ liệu ở đây
+      console.log("Dữ liệu từ cơ sở dữ liệu nhacungcap và loaihang:", results);
+
+      // Hiển thị trang HTML với dữ liệu từ cơ sở dữ liệu
+      res.render("kho", { data: results });
     }
-    // Xử lý kết quả dữ liệu ở đây
-    console.log("Dữ liệu từ cơ sở dữ liệu trang chu:", results);
-    // Hiển thị trang HTML với dữ liệu từ cơ sở dữ liệu
-    res.render("kho", { nhacungcap1: results });
-  });
+  );
 };
+
 exports.xoahanghoa = (req, res) => {
   const maHangHoa = req.params.MaHH; // Lấy mã hàng hóa từ đường dẫn URL
 
@@ -370,10 +424,41 @@ exports.hiennhanvien = (req, res) => {
     // Xử lý kết quả dữ liệu ở đây
     console.log("Dữ liệu từ cơ sở dữ liệu nhanvien:", results);
 
-    // Hiển thị trang HTML với dữ liệu từ cơ sở dữ liệu
-    res.render("hienthithongtinnv", { nhanvien: results });
+    dB.query("SELECT * FROM nhanvien", (err, results, fields) => {
+      if (err) {
+        console.error("Lỗi truy vấn:", err);
+        return;
+      }
+      // Xử lý kết quả dữ liệu ở đây
+      console.log("Dữ liệu từ cơ sở dữ liệu nhanvien:", results);
+      // Hiển thị trang HTML với dữ liệu từ cơ sở dữ liệu
+      res.render("hienthithongtinnv", {
+        nhanvien: results,
+        message: "Xóa thành công!",
+      });
+    });
   });
 };
+
+exports.xoanhanvien = (req, res) => {
+  const maNhanVien = req.params.MaNv; // Lấy mã hàng hóa từ đường dẫn URL
+
+  // Thực hiện truy vấn SQL DELETE để xóa hàng hóa từ CSDL
+  const sql = "DELETE FROM nhanvien WHERE MaNv = ?";
+
+  dB.query(sql, [maNhanVien], (error, results) => {
+    if (error) {
+      console.error("Lỗi khi xóa Nhân viên:", error);
+      // Xử lý lỗi nếu cần
+      successMessage = "Xóa Nhân viên thất bại.";
+    } else {
+      // Xóa thành công, có thể cập nhật giao diện người dùng, ví dụ: loại bỏ hàng từ danh sách hàng hóa.
+      successMessage = "Xóa Nhân viên thành công.";
+    }
+    return res.redirect("/hiennhanvien");
+  });
+};
+
 exports.hienmenu = (req, res) => {
   dB.query("SELECT * FROM menu", (err, results, fields) => {
     if (err) {
