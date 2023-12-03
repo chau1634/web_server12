@@ -46,7 +46,7 @@ router.get("/themmenu", (req, res) => {
 
 router.get("/xoamenu/:MaMn", authController.xoamenu);
 
-router.get("/suamenu/:MaMn", authController.suamenu);
+// router.get("/suamenu/:MaMn", authController.suamenu);
 router.get("/hiensuamenu/:MaMn", authController.hiensuamenu);
 
 router.get("/nhacungcap", (req, res) => {

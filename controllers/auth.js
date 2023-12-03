@@ -309,3 +309,21 @@ exports.themmenu = (req, res) => {
     }
   );
 };
+exports.xoamenu = (req, res) => {
+  const maMenu = req.params.MaMn; // Lấy mã hàng hóa từ đường dẫn URL
+
+  // Thực hiện truy vấn SQL DELETE để xóa hàng hóa từ CSDL
+  const sql = "DELETE FROM menu WHERE MaMn = ?";
+
+  dB.query(sql, [maMenu], (error, results) => {
+    if (error) {
+      console.error("Lỗi khi xóa Menu:", error);
+      // Xử lý lỗi nếu cần
+      successMessage = "Xóa Menu thất bại.";
+    } else {
+      // Xóa thành công, có thể cập nhật giao diện người dùng, ví dụ: loại bỏ hàng từ danh sách hàng hóa.
+      successMessage = "Xóa Menu thành công.";
+    }
+    return res.redirect("/hienmenu");
+  });
+};
