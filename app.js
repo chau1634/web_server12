@@ -4,7 +4,19 @@ const app = express();
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const helpers = require("handlebars-helpers")();
+const session = require("express-session");
 
+// Use the 'express-session' middleware
+app.use(
+  session({
+    secret: "your-secret-key", // Replace with a secret key for session encryption
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 3600000, // Session timeout in milliseconds (1 hour in this example)
+    },
+  })
+);
 const Port = 8000;
 
 // DotENV Confing

@@ -152,6 +152,7 @@
                             <a href="#" class="dropdown-item text-center">See all message</a>
                         </div>
                     </div>
+
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i class="fa fa-bell me-lg-2"></i>
@@ -159,14 +160,19 @@
                         </a>
 
                     </div>
+
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <img class="rounded-circle me-lg-2" src="http://localhost:8000/img/user.jpg" alt=""
                                 style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">John Doe</span>
+                            <span class="d-none d-lg-inline-flex"> {{#each tenNv}}
+                               <p>Xin chào {{this}}</p>
+                             {{/each}}</span>
+                                
+                         
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">My Profile</a>
+                            <a href="/myprofile" class="dropdown-item">My Profile</a>
                             <a href="#" class="dropdown-item">Settings</a>
                             <a href="/login" class="dropdown-item">Log Out</a>
                         </div>
@@ -446,28 +452,135 @@
                     </div>
                 </div>
             </div>
-            <!-- Widgets End -->
 
 
-            <!-- Footer Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="bg-light rounded-top p-4">
-                    <div class="row">
-                        <div class="col-12 col-sm-6 text-center text-sm-start">
-                            &copy; <a href="#">Your Site Name</a>, All Right Reserved. 
-                        </div>
-                        <div class="col-12 col-sm-6 text-center text-sm-end">
-                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                            Designed By <a href="https://htmlcodex.com">HTML Codex</a>
-                        </br>
-                        Distributed By <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Footer End -->
-        </div>
-        <!-- Content End -->
+
+            <!-- Add this script at the end of your HTML body -->
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var ngayCells = document.querySelectorAll('.product-table tbody td:nth-child(2)');
+                    var tongtienCells = document.querySelectorAll('.product-table tbody td:nth-child(3)');
+                    var doanhThuTheoNgay = {};
+                    var labels = [];
+                    var data = [];
+
+                    ngayCells.forEach(function (cell, index) {
+                        var formattedDate = moment(cell.textContent.trim()).format('DD/MM/YYYY');
+                        var cellValue = parseFloat(tongtienCells[index].textContent);
+
+                        if (doanhThuTheoNgay.hasOwnProperty(formattedDate)) {
+                            doanhThuTheoNgay[formattedDate].tongThu += cellValue;
+                            doanhThuTheoNgay[formattedDate].rows.push({ ngay: formattedDate, thu: cellValue });
+                        } else {
+                            doanhThuTheoNgay[formattedDate] = {
+                                tongThu: cellValue,
+                                rows: [{ ngay: formattedDate, thu: cellValue }]
+                            };
+                        }
+                    });
+                    labels = Object.keys(doanhThuTheoNgay).sort();
+
+                    var tbody = document.querySelector('.product-table tbody');
+                    tbody.innerHTML = '';
+                    Object.keys(doanhThuTheoNgay).forEach(function (ngay) {
+                        doanhThuTheoNgay[ngay].rows.forEach(function (row) {
+                            var newRow = document.createElement('tr');
+                            newRow.innerHTML = `<td>${row.ngay}</td><td>${row.thu}</td>`;
+                            tbody.appendChild(newRow);
+                        });
+
+                        var totalRow = document.createElement('tr');
+                        totalRow.innerHTML = `<td><strong>Doanh thu ngày ${ngay}</strong></td><td>${doanhThuTheoNgay[ngay].tongThu}</td>`;
+                        tbody.appendChild(totalRow);
+                    });
+
+                    // Update labels and data for chart
+                    labels = Object.keys(doanhThuTheoNgay);
+                    data = labels.map(function (ngay) {
+                        return doanhThuTheoNgay[ngay].tongThu;
+                    });
+
+                    var ctx = document.getElementById('barChart').getContext('2d');
+                    var barChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Doanh thu theo ngày',
+                                data: data,
+                                backgroundColor: 'rgba(75, 192, 192)',
+                                borderColor: 'rgb(242, 47, 47)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+
+                    // Update labels and data for the second chart
+                    data = labels.map(function (ngay) {
+                        return doanhThuTheoNgay[ngay].tongThu;
+                    });
+
+                    var ctx2 = document.getElementById('barChartHome').getContext('2d');
+                    var barChartHome = new Chart(ctx2, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Doanh thu theo ngày',
+                                data: data,
+                                backgroundColor: 'rgba(75, 192, 192)',
+                                borderColor: 'rgb(242, 47, 47)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+
+                    // Display revenue for today, yesterday, average revenue, and total revenue
+                    var lastTwoDates = labels.slice(-2);
+                    var todayRevenue = doanhThuTheoNgay[lastTwoDates[1]].tongThu;
+                    var yesterdayRevenue = doanhThuTheoNgay[lastTwoDates[0]].tongThu;
+                    var averageRevenue = data.reduce((sum, value) => sum + value, 0) / data.length;
+                    var totalRevenue = data.reduce((sum, value) => sum + value, 0);
+
+                    document.getElementById('day1Revenue').innerText = `${todayRevenue.toFixed(0)}VND`;
+                    document.getElementById('day2Revenue').innerText = `${yesterdayRevenue.toFixed(0)}VND`;
+                    document.getElementById('todayRevenueValue').innerText = `${averageRevenue.toFixed(0)}VND`;
+                    document.getElementById('totalRevenueValue').innerText = `${totalRevenue.toFixed(0)}VND`;
+                });
+            </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             <!-- Back to Top -->

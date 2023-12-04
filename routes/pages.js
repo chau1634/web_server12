@@ -47,7 +47,7 @@ router.get("/themmenu", (req, res) => {
 router.get("/xoamenu/:MaMn", authController.xoamenu);
 
 // router.get("/suamenu/:MaMn", authController.suamenu);
-router.get("/hiensuamenu/:MaMn", authController.hiensuamenu);
+// router.get("/hiensuamenu/:MaMn", authController.hiensuamenu);
 
 router.get("/nhacungcap", (req, res) => {
   res.render("nhacungcap");
@@ -61,7 +61,9 @@ router.get("/doanhthu1", (req, res) => {
 });
 
 router.get("/suahanghoa/:MaHH", authController.suahanghoa);
+router.get("/suanhanvien/:MaNv", authController.suanhanvien);
 router.get("/suanhacungcap1/:MaNcc", authController.suanhacungcap1);
+router.get("/loaihanglist", authController.getLoaiHangList);
 
 router.get("/hiennhanvien", authController.hiennhanvien);
 router.get("/hienmenu", authController.hienmenu);
@@ -76,3 +78,7 @@ router.get("/xoanhanvien/:MaNv", authController.xoanhanvien);
 
 router.get("/doanhthu", authController.doanhthu);
 router.get("/auth/login", authController.doanhthutrangchu);
+
+router.get("/myprofile", authController.myprofile);
+
+module.exports = router;
