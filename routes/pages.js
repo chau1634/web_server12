@@ -64,4 +64,10 @@ router.get("/xoanhanvien/:MaNv", authController.xoanhanvien);
 router.get("/doanhthu", authController.doanhthu);
 router.get("/auth/login", authController.doanhthutrangchu);
 
+
+router.get("/myprofile", authController.myprofile);
+
+
 module.exports = router;
+
+
