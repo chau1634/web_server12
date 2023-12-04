@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>DASHMIN - Bootstrap Admin Template</title>
+    <title>Quan ly quan cooffee FPT</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -25,11 +25,10 @@
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="/css/style.css" rel="stylesheet">
-
+    <link href="../css/style.css" rel="stylesheet">
 
 
 
@@ -38,12 +37,12 @@
 <body>
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
-        <div id="spinner"
+        {{!-- <div id="spinner"
             class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
-        </div>
+        </div> --}}
         <!-- Spinner End -->
 
 
@@ -51,7 +50,7 @@
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
                 <a href="index.html" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
+                    <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>Cooffee</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
@@ -62,38 +61,20 @@
                         </div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">Jhon Doe</h6>
+
                         <span>Admin</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
                     <a href="/auth/login" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Quản Lý</a>
-                    {{!-- <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                                class="fa fa-laptop me-2"></i>Elements</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="button.html" class="dropdown-item">Buttons</a>
-                            <a href="typography.html" class="dropdown-item">Typography</a>
-                            <a href="element.html" class="dropdown-item">Other Elements</a>
-                        </div>
-                    </div> --}}
-                    <a href="/kho" class="nav-item nav-link "><i class="fa fa-th me-2"></i>Kho Hàng</a>
-                    <a href="/themnhanvien" class="nav-item nav-link "><i class="fa fa-keyboard me-2"></i>Quản lý nhân
-                        viên</a>
-                    <a href="/themmenu" class="nav-item nav-link active"><i class="fa fa-table me-2"></i>Quản lý
-                        Menu</a>
-                    <a href="qldoanhthu.hbs" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Quản lý doanh
-                        thu</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-item nav-link" data-bs-toggle="dropdown"><i
-                                class="far fa-file-alt me-2"></i>Pages</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="signin.html" class="dropdown-item">Sign In</a>
-                            <a href="signup.html" class="dropdown-item">Sign Up</a>
 
-                            <a href="blank.html" class="dropdown-item">Blank Page</a>
-                        </div>
-                    </div>
+                    <a href="/kho" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Kho Hàng</a>
+                    <a href="/themnhanvien" class="nav-item nav-link active "><i class="fa fa-keyboard me-2"></i>Quản lý
+                        nhân viên</a>
+                    <a href="/themmenu" class="nav-item nav-link "><i class="fa fa-table me-2"></i>Quản lý Menu</a>
+                    <a href="/doanhthu1" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Quản lý doanh
+                        thu</a>
+
                 </div>
             </nav>
         </div>
@@ -115,10 +96,7 @@
                 </form>
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-envelope me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Message</span>
-                        </a>
+
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">
                                 <div class="d-flex align-items-center">
@@ -161,24 +139,7 @@
                             <i class="fa fa-bell me-lg-2"></i>
                             <span class="d-none d-lg-inline-flex">Notificatin</span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Profile updated</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">New user added</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Password changed</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item text-center">See all notifications</a>
-                        </div>
+
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
@@ -197,9 +158,9 @@
             <!-- Navbar End -->
 
 
-            <!-- 404 Start -->
+
             <div class="row">
-                <h1 style="text-align: center; margin-top: 50px; ">Chỉnh sửa Menu</h1>
+                <h1 style="text-align: center; margin-top: 50px; ">Sửa Thông Tin Menu</h1>
                 <div class="col-lg-5 col-md-7 col-sm-9 col-11 mx-auto">
 
 
@@ -208,41 +169,44 @@
                             <div class="row">
                                 <div class="col-lg-15 col-md-15 col-sm-15 col-15 mx-auto form-wrapper">
                                     <div class="form-container">
-
-                                        <form action="/auth/suamenu" method="POST" style="margin-top: 20px;">
+                                        {{#each employee}}
+                                        <form action="/auth/capNhatMenu" method="POST" style="margin-top: 20px;">
                                             <div class="form-group input-rounded">
-                                                {{!-- <select class="form-control" id="chucvu" name="mamn"
-                                                    style="margin-bottom: 5px; padding: 10px;">
-                                                    <option value="Đồ uống">1. Đồ uống</option>
-                                                    <option value="Khác">2. Khác</option>
-                                                </select> --}}
-                                            </div>
-                                            <div class="form-group input-rounded">
-                                                <input type="text" class="form-control" placeholder="Mã đồ uống"
-                                                    id="MaMn" name="mamn" style=" margin-bottom: 5px; padding: 10px;" />
+                                                <input type="text" class="form-control" placeholder="Mã Menu"
+                                                    id="MaMn" value="{{this.MaMn}}" name="maMn"
+                                                    style=" margin-bottom: 5px; padding: 10px; top: 10px;" readonly />
                                             </div>
                                             <div class="form-group input-rounded">
                                                 <input type="text" class="form-control" placeholder="Tên đồ uống"
-                                                    id="TenDu" name="tenmn"
+                                                    id="TenDu" value="{{this.TenDu}}" name="tenmn"
                                                     style=" margin-bottom: 5px; padding: 10px;" />
                                             </div>
                                             <div class="form-group input-rounded">
                                                 <input type="text" class="form-control" placeholder="Giá tiền"
-                                                    id="Giatien" name="giatien"
+                                                    id="Giatien" value="{{this.Giatien}}" name="giatien"
                                                     style=" margin-bottom: 5px;  padding: 10px;" />
                                             </div>
-
+                                            <div class="form-group input-rounded">
+                                                <input type="text" class="form-control" placeholder="Tên Loại hàng"
+                                                    id="TenLh" value="{{this.TenLh}}" name="tenLh"
+                                                    style=" margin-bottom: 5px;  padding: 10px;" />
+                                            </div>
+                                            {{!-- <a href="/hiensuamenu1">Cập nhật</a>
+                                            <select id="TenLh" name="tenLh" style="margin-bottom: 5px; width: 100px;">
+                                                {{#each data}}
+                                                {{#if this.TenLh}}
+                                                <option value="{{this.TenLh}}">{{this.TenLh}}</option>
+                                                {{/if}}
+                                                {{/each}}
+                                            </select> --}}
                                             <div style="display: flex; justify-content: space-between;">
                                                 <button type="submit" class="btn btn-primary"
-                                                    style="flex: 1; margin-right: 10px;"> Sửa</button>
-                                                <a href="/hienmenu" class="btn btn-primary" style="flex: 1;">Menu</a>
+                                                    style="flex: 1; margin-right: 10px;"> Sửa </button>
+                                                <a href="/hienmenu" class="btn btn-primary" style="flex: 1;">Danh
+                                                    sách nhân viên</a>
                                             </div>
-
-
-
-
                                         </form>
-
+                                        {{/each}}
 
 
                                         {{#if message}}
@@ -255,6 +219,10 @@
                         </div>
                     </div>
                 </div>
+
+
+
+
 
 
 

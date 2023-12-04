@@ -176,7 +176,7 @@
                      </select> --}}
                    </div>
                 <div class="form-group input-rounded">
-                    <input type="text" class="form-control" placeholder="Mã đồ uống" id="MaMn" name="mamn"
+                    <input type="text" class="form-control" placeholder="Mã đồ uống" id="MaMn" name="maMn"
                         style=" margin-bottom: 5px; padding: 10px;" />
                 </div>
                     <div class="form-group input-rounded">
@@ -185,14 +185,14 @@
                     <div class="form-group input-rounded">
                       <input type="text" class="form-control" placeholder="Giá tiền" id="Giatien" name="giatien" style=" margin-bottom: 5px;  padding: 10px;"/>
                     </div>
-                    <div class="form-group input-rounded">
-                        <select class="form-control" id="TenLh" name="tenlh" style="margin-bottom: 5px; padding: 10px;">
-                            <option value="">Chọn loại hàng</option>
-                            <option value="loai1">Loại 1</option>
-                            <option value="loai2">Loại 2</option>
-                            <!-- Thêm các option khác nếu cần -->
-                        </select>
-                    </div>
+                    <a href="/hienmenu1">Cập nhật</a>
+                    <select id="TenLh" name="tenLh" style="margin-bottom: 5px; width: 100px;">
+                        {{#each data}}
+                        {{#if this.TenLh}}
+                        <option value="{{this.TenLh}}">{{this.TenLh}}</option>
+                        {{/if}}
+                        {{/each}}
+                    </select>
                 
                     <div style="display: flex; justify-content: space-between;">
     <button type="submit" class="btn btn-primary" style="flex: 1; margin-right: 10px;"> Thêm </button>
