@@ -321,6 +321,10 @@
                     var ngayCells = document.querySelectorAll('.product-table tbody td:nth-child(2)');
                     var tongtienCells = document.querySelectorAll('.product-table tbody td:nth-child(3)');
                     var doanhThuTheoNgay = {};
+                    var currentDate = moment().format('DD/MM/YYYY');
+                    var currentMonth = moment().format('MM/YYYY');
+                    var firstDayOfMonth = moment(currentMonth, 'MM/YYYY').startOf('month');
+                    var lastDayOfMonth = moment(currentMonth, 'MM/YYYY').endOf('month');
                     var labels = [];
                     var data = [];
 
@@ -381,8 +385,7 @@
                             }
                         }
                     });
-
-                    // Update labels and data for the second chart
+   
                     data = labels.map(function (ngay) {
                         return doanhThuTheoNgay[ngay].tongThu;
                     });
@@ -409,17 +412,38 @@
                         }
                     });
 
-                    // Display revenue for today, yesterday, average revenue, and total revenue
-                    var lastTwoDates = labels.slice(-2);
-                    var todayRevenue = doanhThuTheoNgay[lastTwoDates[1]].tongThu;
-                    var yesterdayRevenue = doanhThuTheoNgay[lastTwoDates[0]].tongThu;
-                    var averageRevenue = data.reduce((sum, value) => sum + value, 0) / data.length;
-                    var totalRevenue = data.reduce((sum, value) => sum + value, 0);
+                    var numberOfDaysInMonth = lastDayOfMonth.diff(firstDayOfMonth, 'days') + 1;
+                    var revenueForCurrentMonth = Object.keys(doanhThuTheoNgay)
+                        .filter(function (ngay) {
+                            return ngay.includes(currentMonth);
+                        })
+                        .map(function (ngay) {
+                            return doanhThuTheoNgay[ngay].tongThu || 0; 
+                        });
 
-                    document.getElementById('day1Revenue').innerText = `${todayRevenue.toFixed(0)}VND`;
-                    document.getElementById('day2Revenue').innerText = `${yesterdayRevenue.toFixed(0)}VND`;
-                    document.getElementById('todayRevenueValue').innerText = `${averageRevenue.toFixed(0)}VND`;
-                    document.getElementById('totalRevenueValue').innerText = `${totalRevenue.toFixed(0)}VND`;
+                    var averageRevenueMonth = revenueForCurrentMonth.length > 0
+                        ? revenueForCurrentMonth.reduce((sum, value) => sum + value, 0) / numberOfDaysInMonth
+                        : 0;
+
+                    var totalRevenueMonth = revenueForCurrentMonth.reduce((sum, value) => sum + value, 0);
+
+                    if (doanhThuTheoNgay.hasOwnProperty(currentDate)) {
+                        var todayRevenue = doanhThuTheoNgay[currentDate].tongThu;
+                        document.getElementById('day1Revenue').innerText = `${todayRevenue.toFixed(0)}VND`;
+                    } else {
+                        document.getElementById('day1Revenue').innerText = '0 VND';
+                    }
+
+                    var yesterdayDate = moment().subtract(1, 'days').format('DD/MM/YYYY');
+
+                    if (doanhThuTheoNgay.hasOwnProperty(yesterdayDate)) {
+                        var yesterdayRevenue = doanhThuTheoNgay[yesterdayDate].tongThu;
+                        document.getElementById('day2Revenue').innerText = `${yesterdayRevenue.toFixed(0)}VND`;
+                    } else {
+                        document.getElementById('day2Revenue').innerText = '0 VND';
+                    }
+                    document.getElementById('todayRevenueValue').innerText = `${averageRevenueMonth.toFixed(0)}VND`;
+                    document.getElementById('totalRevenueValue').innerText = `${totalRevenueMonth.toFixed(0)}VND`;
                 });
             </script>
 
